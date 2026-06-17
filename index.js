@@ -296,9 +296,42 @@ toggle.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : '
     canvas.style.pointerEvents = 'all';
   });
 
+/* ---- star field ---- */
+  let stars = [];
+  function spawnStars() {
+    stars = [];
+    const count = Math.floor((W * H) / 9000); /* density scales with canvas size */
+    for (let i = 0; i < count; i++) {
+      stars.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: 0.4 + Math.random() * 1.1,
+        baseAlpha: 0.15 + Math.random() * 0.35,
+        twinkleSpeed: 0.4 + Math.random() * 0.8,
+        twinkleOffset: Math.random() * Math.PI * 2,
+      });
+    }
+  }
+  spawnStars();
+  window.addEventListener('resize', spawnStars, { passive: true });
+
+  function drawStars(now) {
+    const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+    if (!isDark) return; /* skip in light mode, dots read poorly on light bg */
+    stars.forEach(s => {
+      const t = now / 1000;
+      const alpha = s.baseAlpha + Math.sin(t * s.twinkleSpeed + s.twinkleOffset) * 0.12;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${Math.max(0, alpha)})`;
+      ctx.fill();
+    });
+  }
+
   /* ---- main loop ---- */
   function tick(now) {
     ctx.clearRect(0, 0, W, H);
+    drawStars(now);
 
     /* sort by depth so deeper fish render first (behind nearer ones) */
     const sorted = [...fish].sort((a, b) => a.depth - b.depth);
