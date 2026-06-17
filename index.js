@@ -38,40 +38,28 @@ applyTheme(theme);
 toggle.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
 
 /* ============================================================
-   KOI POND — swimming fish with click ripple + startle
+   NEURAL NETWORK — nodes that connect and grow over time
 ============================================================ */
-(function initKoi() {
+(function initNetwork() {
   const canvas = document.getElementById('topo-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
 
   /* ---- config ---- */
-  const KOI_COUNT      = 10;
-  const SPEED_MIN      = 0.22;
-  const SPEED_MAX      = 0.55;
-  const TURN_RATE      = 0.028;   /* radians per frame, normal steering */
-  const STARTLE_SPEED  = 1.8;     /* speed burst on ripple hit */
-  const STARTLE_MS     = 600;     /* how long startle lasts */
-  const RIPPLE_RINGS   = 5;
-  const RIPPLE_MS      = 900;
-  const EDGE_MARGIN    = 80;      /* px from edge before fish turns */
-  const WANDER_CHANGE  = 0.004;   /* chance per frame to pick new heading */
-
-  /* koi colour palettes [body, accent] */
-  const PALETTES = [
-    ['#e8622a', '#ffffff'],  /* orange + white */
-    ['#ffffff', '#e8622a'],  /* white + orange */
-    ['#c0392b', '#000000'],  /* red + black */
-    ['#f5c842', '#e8622a'],  /* gold + orange */
-    ['#ffffff', '#000000'],  /* white + black */
-    ['#e8622a', '#c0392b'],  /* orange + red */
-  ];
+  const NODE_COUNT        = 42;
+  const CONNECT_RADIUS    = 170;     /* px — nodes within this range can link */
+  const MAX_EDGES_PER_NODE = 3;      /* caps density so it never saturates */
+  const FIRE_INTERVAL_MS  = [1800, 4200]; /* random range between a node's connection attempts */
+  const EDGE_FADE_IN_MS   = 700;
+  const PULSE_MS          = 1400;
+  const DRIFT_SPEED       = 0.05;    /* gentle ambient movement */
+  const ACTIVATE_RADIUS   = 160;     /* click/hover activation radius */
+  const PROPAGATE_HOPS    = 2;       /* how many edges a signal travels outward */
 
   let W = 0, H = 0;
-  let ripples = [];
-  let fish = [];
+  let nodes = [];
+  let pulses = []; /* traveling signal dots along edges, for click/hover propagation */
 
-  /* ---- resize ---- */
   function resize() {
     W = canvas.width  = canvas.offsetWidth;
     H = canvas.height = canvas.offsetHeight;
@@ -79,216 +67,173 @@ toggle.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : '
   resize();
   window.addEventListener('resize', resize, { passive: true });
 
-  /* ---- spawn fish ---- */
-  function spawnFish() {
-    fish = [];
-    for (let i = 0; i < KOI_COUNT; i++) {
-      const palette = PALETTES[i % PALETTES.length];
-      const depth = 0.3 + Math.random() * 0.7;
-      fish.push({
-        x:        Math.random() * W,
-        y:        Math.random() * H,
-        angle:    Math.random() * Math.PI * 2,
-        targetAngle: Math.random() * Math.PI * 2,
-        speed:    SPEED_MIN + Math.random() * (SPEED_MAX - SPEED_MIN),
-        baseSpeed: SPEED_MIN + Math.random() * (SPEED_MAX - SPEED_MIN),
-        length:   38 + depth * 28,
-        depth,
-        body:     palette[0],
-        accent:   palette[1],
-        wagT:     Math.random() * Math.PI * 2,
-        wagSpeed: 0.06 + Math.random() * 0.04,
-        startleUntil: 0,
-        startleAngle: 0,
-        attractUntil: 0,   /* new */
+  function spawnNodes() {
+    nodes = [];
+    for (let i = 0; i < NODE_COUNT; i++) {
+      nodes.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        vx: (Math.random() - 0.5) * DRIFT_SPEED,
+        vy: (Math.random() - 0.5) * DRIFT_SPEED,
+        edges: [],              /* { to: nodeIndex, bornAt: ms, strength: 0-1 } */
+        nextFireAt: performance.now() + rand(FIRE_INTERVAL_MS[0], FIRE_INTERVAL_MS[1]),
+        activatedUntil: 0,
+        baseRadius: 1.6 + Math.random() * 1.4,
       });
     }
   }
-  spawnFish();
+  spawnNodes();
 
-  /* ---- draw one koi ---- */
-  function drawKoi(f, now) {
-    const L   = f.length;
-    const W2  = L * 0.28;   /* half-width at widest */
-    const wag = Math.sin(f.wagT) * (L * 0.18);  /* tail wag amplitude */
+  function rand(a, b) { return a + Math.random() * (b - a); }
 
-    ctx.save();
-    ctx.translate(f.x, f.y);
-    ctx.rotate(f.angle + Math.PI / 2);
-
-    const alpha = 0.55 + f.depth * 0.35;
-
-    /* --- body --- */
-    ctx.beginPath();
-    ctx.moveTo(0, -L * 0.48);                     /* nose */
-    ctx.bezierCurveTo( W2, -L * 0.1,  W2,  L * 0.25,  wag * 0.4,  L * 0.42);  /* right side */
-    ctx.bezierCurveTo(-W2,  L * 0.25, -W2, -L * 0.1,  0, -L * 0.48);           /* left side */
-    ctx.closePath();
-    ctx.globalAlpha = alpha;
-    ctx.fillStyle   = f.body;
-    ctx.fill();
-
-    /* --- accent patch (mid-body blob) --- */
-    ctx.beginPath();
-    ctx.ellipse(W2 * 0.3, L * 0.05, W2 * 0.55, L * 0.18, 0.3, 0, Math.PI * 2);
-    ctx.fillStyle = f.accent;
-    ctx.globalAlpha = alpha * 0.7;
-    ctx.fill();
-
-    /* --- tail --- */
-    ctx.beginPath();
-    ctx.moveTo(0, L * 0.42);
-    ctx.lineTo( wag + W2 * 0.9,  L * 0.72);
-    ctx.lineTo( wag * 0.2,        L * 0.56);
-    ctx.lineTo(-wag + W2 * -0.9,  L * 0.72);
-    ctx.closePath();
-    ctx.fillStyle   = f.body;
-    ctx.globalAlpha = alpha * 0.85;
-    ctx.fill();
-
-    /* --- pectoral fins --- */
-    ctx.beginPath();
-    ctx.ellipse( W2 * 0.85, L * 0.02, W2 * 0.45, L * 0.1, 0.5, 0, Math.PI * 2);
-    ctx.fillStyle   = f.body;
-    ctx.globalAlpha = alpha * 0.5;
-    ctx.fill();
-
-    ctx.beginPath();
-    ctx.ellipse(-W2 * 0.85, L * 0.02, W2 * 0.45, L * 0.1, -0.5, 0, Math.PI * 2);
-    ctx.fill();
-
-    /* --- eye --- */
-    ctx.beginPath();
-    ctx.arc(W2 * 0.38, -L * 0.36, 2.2, 0, Math.PI * 2);
-    ctx.fillStyle   = '#111';
-    ctx.globalAlpha = alpha;
-    ctx.fill();
-
-    ctx.globalAlpha = 1;
-    ctx.restore();
+  function dist(a, b) {
+    const dx = a.x - b.x, dy = a.y - b.y;
+    return Math.sqrt(dx * dx + dy * dy);
   }
 
-  function spawnFish() {
-    fish = [];
-    for (let i = 0; i < KOI_COUNT; i++) {
-      const palette = PALETTES[i % PALETTES.length];
-      const depth = 0.3 + Math.random() * 0.7;
-      fish.push({
-        x:        Math.random() * W,
-        y:        Math.random() * H,
-        angle:    Math.random() * Math.PI * 2,
-        targetAngle: Math.random() * Math.PI * 2,
-        speed:    SPEED_MIN + Math.random() * (SPEED_MAX - SPEED_MIN),
-        baseSpeed: SPEED_MIN + Math.random() * (SPEED_MAX - SPEED_MIN),
-        length:   38 + depth * 28,
-        depth,
-        body:     palette[0],
-        accent:   palette[1],
-        wagT:     Math.random() * Math.PI * 2,
-        wagSpeed: 0.06 + Math.random() * 0.04,
-        startleUntil: 0,
-        startleAngle: 0,
-        attractUntil: 0,   /* new */
+  function hasEdge(i, j) {
+    return nodes[i].edges.some(e => e.to === j);
+  }
+
+  function addEdge(i, j, now) {
+    if (i === j || hasEdge(i, j)) return;
+    const a = nodes[i], b = nodes[j];
+
+    a.edges.push({ to: j, bornAt: now, strength: 0 });
+    b.edges.push({ to: i, bornAt: now, strength: 0 });
+
+    /* enforce cap — drop the oldest edge on each node if over limit */
+    [i, j].forEach(idx => {
+      const n = nodes[idx];
+      if (n.edges.length > MAX_EDGES_PER_NODE) {
+        n.edges.sort((e1, e2) => e1.bornAt - e2.bornAt);
+        const dropped = n.edges.shift();
+        /* remove the matching reverse edge on the other side too */
+        const other = nodes[dropped.to];
+        other.edges = other.edges.filter(e => e.to !== idx);
+      }
+    });
+  }
+
+  function tryFire(i, now) {
+    const n = nodes[i];
+    if (now < n.nextFireAt) return;
+    n.nextFireAt = now + rand(FIRE_INTERVAL_MS[0], FIRE_INTERVAL_MS[1]);
+
+    /* find nearby candidates not already connected */
+    const candidates = [];
+    for (let j = 0; j < nodes.length; j++) {
+      if (j === i) continue;
+      if (hasEdge(i, j)) continue;
+      const d = dist(n, nodes[j]);
+      if (d < CONNECT_RADIUS) candidates.push(j);
+    }
+    if (candidates.length === 0) return;
+    const target = candidates[Math.floor(Math.random() * candidates.length)];
+    addEdge(i, target, now);
+  }
+
+  function updateNodes(now) {
+    nodes.forEach(n => {
+      n.x += n.vx;
+      n.y += n.vy;
+      if (n.x < 0 || n.x > W) n.vx *= -1;
+      if (n.y < 0 || n.y > H) n.vy *= -1;
+      n.x = Math.max(0, Math.min(W, n.x));
+      n.y = Math.max(0, Math.min(H, n.y));
+
+      n.edges.forEach(e => {
+        const age = now - e.bornAt;
+        e.strength = Math.min(1, age / EDGE_FADE_IN_MS);
       });
-    }
+    });
+
+    for (let i = 0; i < nodes.length; i++) tryFire(i, now);
   }
 
-  function updateFish(f, now) {
-    f.wagT += f.wagSpeed;
-
-    if (now < f.attractUntil && f.attractX !== undefined) {
-      f.targetAngle = Math.atan2(f.attractY - f.y, f.attractX - f.x);
-    }
-
-    const startled  = now < f.startleUntil;
-    const attracted = now < f.attractUntil;
-
-    let aimAngle;
-    if (startled) {
-      aimAngle = f.startleAngle;
-    } else if (attracted) {
-      aimAngle = f.targetAngle;  /* kept fresh every frame below */
-    } else {
-      aimAngle = f.targetAngle;
-    }
-
-    let diff = aimAngle - f.angle;
-    while (diff >  Math.PI) diff -= Math.PI * 2;
-    while (diff < -Math.PI) diff += Math.PI * 2;
-
-    const turnRate = startled ? 0.18 : attracted ? 0.14 : TURN_RATE;
-    f.angle += diff * turnRate;
-
-    const targetSpeed = startled ? STARTLE_SPEED : attracted ? f.baseSpeed * 1.6 : f.baseSpeed;
-    f.speed += (targetSpeed - f.speed) * 0.08;
-
-    f.x += Math.cos(f.angle) * f.speed;
-    f.y += Math.sin(f.angle) * f.speed;
-
-    const nearEdge =
-      f.x < EDGE_MARGIN || f.x > W - EDGE_MARGIN ||
-      f.y < EDGE_MARGIN || f.y > H - EDGE_MARGIN;
-
-    if (nearEdge && !startled && !attracted) {
-      f.targetAngle = Math.atan2(H / 2 - f.y, W / 2 - f.x)
-                      + (Math.random() - 0.5) * 0.8;
-    } else if (!startled && !attracted && Math.random() < WANDER_CHANGE) {
-      f.targetAngle = f.angle + (Math.random() - 0.5) * 1.4;
-    }
-
-    if (f.x < -f.length * 2) f.x = W + f.length;
-    if (f.x > W + f.length * 2) f.x = -f.length;
-    if (f.y < -f.length * 2) f.y = H + f.length;
-    if (f.y > H + f.length * 2) f.y = -f.length;
+  function isDark() {
+    return document.documentElement.getAttribute('data-theme') !== 'light';
   }
 
-  /* ---- draw water ripples ---- */
-  function drawRipples(now) {
-    const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
-    ripples = ripples.filter(r => now - r.t < RIPPLE_MS);
-    ripples.forEach(r => {
-      const p = (now - r.t) / RIPPLE_MS;
-      for (let i = 0; i < RIPPLE_RINGS; i++) {
-        const rp = Math.max(0, p - i * 0.12);
-        if (rp <= 0) continue;
-        const radius  = rp * Math.min(W, H) * 0.35;
-        const opacity = (1 - rp) * (isDark ? 0.18 : 0.45);
+  function drawEdges(now) {
+    const dark = isDark();
+    nodes.forEach((n, i) => {
+      n.edges.forEach(e => {
+        if (e.to < i) return; /* draw each edge once */
+        const other = nodes[e.to];
+        const opacity = e.strength * (dark ? 0.22 : 0.35);
         ctx.beginPath();
-        ctx.arc(r.x, r.y, radius, 0, Math.PI * 2);
-        ctx.strokeStyle = isDark
-          ? `rgba(255,255,255,${opacity})`
-          : `rgba(10,100,90,${opacity})`;
-        ctx.lineWidth = isDark ? 0.8 : 1.2;
+        ctx.moveTo(n.x, n.y);
+        ctx.lineTo(other.x, other.y);
+        ctx.strokeStyle = dark
+          ? `rgba(45, 212, 184, ${opacity})`
+          : `rgba(10, 143, 122, ${opacity})`;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      });
+    });
+  }
+
+  function drawNodes(now) {
+    const dark = isDark();
+    nodes.forEach(n => {
+      const activated = now < n.activatedUntil;
+      const pulse = activated
+        ? 0.5 + 0.5 * Math.sin((now % PULSE_MS) / PULSE_MS * Math.PI * 2)
+        : 0;
+      const r = n.baseRadius + (activated ? pulse * 2.2 : Math.min(1, n.edges.length / MAX_EDGES_PER_NODE) * 1.2);
+
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+      ctx.fillStyle = activated
+        ? (dark ? 'rgba(45, 212, 184, 0.95)' : 'rgba(10, 143, 122, 0.95)')
+        : (dark ? 'rgba(244, 244, 245, 0.55)' : 'rgba(20, 18, 16, 0.45)');
+      ctx.fill();
+
+      if (activated) {
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, r + 4 + pulse * 4, 0, Math.PI * 2);
+        ctx.strokeStyle = dark
+          ? `rgba(45, 212, 184, ${0.3 * pulse})`
+          : `rgba(10, 143, 122, ${0.3 * pulse})`;
+        ctx.lineWidth = 1;
         ctx.stroke();
       }
     });
   }
 
-  /* ---- click handler ---- */
-  canvas.addEventListener('click', (e) => {
-    const rect = canvas.getBoundingClientRect();
-    const cx   = e.clientX - rect.left;
-    const cy   = e.clientY - rect.top;
-
-    ripples.push({ x: cx, y: cy, t: performance.now() });
-
+  /* ---- activation / propagation on click or hover ---- */
+  function activateAt(cx, cy) {
     const now = performance.now();
-    fish.forEach(f => {
-      const dx   = f.x - cx;
-      const dy   = f.y - cy;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-
-      if (dist < 200) {
-        /* close fish — startle away */
-        f.startleUntil = now + STARTLE_MS * (1 - dist / 200);
-        f.startleAngle = Math.atan2(dy, dx) + Math.PI / 2;
-      } else {
-        /* far fish — lock onto click position, refresh angle every frame */
-        f.attractX     = cx;
-        f.attractY     = cy;
-        f.attractUntil = now + 4000;
+    const origin = [];
+    nodes.forEach((n, i) => {
+      if (dist(n, { x: cx, y: cy }) < ACTIVATE_RADIUS) {
+        n.activatedUntil = now + PULSE_MS;
+        origin.push(i);
       }
     });
+
+    /* propagate outward along existing edges, a couple hops, with delay */
+    let frontier = origin;
+    for (let hop = 1; hop <= PROPAGATE_HOPS; hop++) {
+      const delay = hop * 220;
+      const next = new Set();
+      frontier.forEach(i => {
+        nodes[i].edges.forEach(e => next.add(e.to));
+      });
+      const nextArr = [...next];
+      setTimeout(() => {
+        const t = performance.now();
+        nextArr.forEach(i => { nodes[i].activatedUntil = t + PULSE_MS; });
+      }, delay);
+      frontier = nextArr;
+    }
+  }
+
+  let lastMoveActivate = 0;
+  canvas.addEventListener('click', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    activateAt(e.clientX - rect.left, e.clientY - rect.top);
 
     canvas.style.pointerEvents = 'none';
     const below = document.elementFromPoint(e.clientX, e.clientY);
@@ -296,11 +241,19 @@ toggle.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : '
     canvas.style.pointerEvents = 'all';
   });
 
-/* ---- star field ---- */
+  canvas.addEventListener('mousemove', (e) => {
+    const now = performance.now();
+    if (now - lastMoveActivate < 260) return; /* throttle */
+    lastMoveActivate = now;
+    const rect = canvas.getBoundingClientRect();
+    activateAt(e.clientX - rect.left, e.clientY - rect.top);
+  }, { passive: true });
+
+  /* ---- star field (unchanged) ---- */
   let stars = [];
   function spawnStars() {
     stars = [];
-    const count = Math.floor((W * H) / 9000); /* density scales with canvas size */
+    const count = Math.floor((W * H) / 9000);
     for (let i = 0; i < count; i++) {
       stars.push({
         x: Math.random() * W,
@@ -316,8 +269,7 @@ toggle.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : '
   window.addEventListener('resize', spawnStars, { passive: true });
 
   function drawStars(now) {
-    const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
-    if (!isDark) return; /* skip in light mode, dots read poorly on light bg */
+    if (!isDark()) return;
     stars.forEach(s => {
       const t = now / 1000;
       const alpha = s.baseAlpha + Math.sin(t * s.twinkleSpeed + s.twinkleOffset) * 0.12;
@@ -332,16 +284,9 @@ toggle.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : '
   function tick(now) {
     ctx.clearRect(0, 0, W, H);
     drawStars(now);
-
-    /* sort by depth so deeper fish render first (behind nearer ones) */
-    const sorted = [...fish].sort((a, b) => a.depth - b.depth);
-
-    sorted.forEach(f => {
-      updateFish(f, now);
-      drawKoi(f, now);
-    });
-
-    drawRipples(now);
+    updateNodes(now);
+    drawEdges(now);
+    drawNodes(now);
     requestAnimationFrame(tick);
   }
 
@@ -353,7 +298,7 @@ toggle.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : '
 ============================================================ */
 requestAnimationFrame(() => {
   const fadeEls = document.querySelectorAll(
-    '.exp-item, .project-card, .article-item, .section-header, .contact-inner'
+    '.exp-item, .project-card, .article-item, .section-header, .contact-inner, .about-body'
   );
 
   fadeEls.forEach(el => el.classList.add('fade-init'));
@@ -375,3 +320,52 @@ requestAnimationFrame(() => {
 
   fadeEls.forEach(el => fadeObserver.observe(el));
 });
+
+
+
+
+/* ============================================================
+   EXPERIENCE — timeline rail + click to expand/collapse
+============================================================ */
+(function initExperienceTimeline() {
+  const items = document.querySelectorAll('#exp-list-col .exp-item');
+  const dotsContainer = document.getElementById('exp-rail-dots');
+  if (!items.length || !dotsContainer) return;
+
+  const dots = [];
+
+  items.forEach((item, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'exp-rail-dot';
+    dot.setAttribute('aria-label', item.querySelector('.exp-role')?.textContent.trim() || `Experience ${i + 1}`);
+    if (item.classList.contains('is-expanded')) dot.classList.add('is-active');
+    dotsContainer.appendChild(dot);
+    dots.push(dot);
+
+    dot.addEventListener('click', () => toggleItem(i));
+    item.querySelector('.exp-toggle')?.addEventListener('click', () => toggleItem(i));
+  });
+
+  function positionDots() {
+    const railHeight = dotsContainer.parentElement.offsetHeight;
+    items.forEach((item, i) => {
+      const itemTop = item.offsetTop;
+      const itemHeight = item.querySelector('.exp-toggle').offsetHeight;
+      const centerY = itemTop + itemHeight / 2 - 9; /* 9 = half dot height */
+      dots[i].style.top = `${centerY}px`;
+    });
+  }
+
+  function toggleItem(i) {
+    const item = items[i];
+    const expanded = item.classList.toggle('is-expanded');
+    item.querySelector('.exp-toggle')?.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    dots[i].classList.toggle('is-active', expanded);
+    /* recalc positions after the expand/collapse transition finishes */
+    setTimeout(positionDots, 360);
+  }
+
+  positionDots();
+  window.addEventListener('resize', positionDots, { passive: true });
+  setTimeout(positionDots, 50); /* catch late font/layout shifts */
+})();
