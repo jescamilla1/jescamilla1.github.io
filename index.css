@@ -259,6 +259,36 @@ ul { list-style: none; }
   gap: var(--space-md);
   flex-wrap: wrap;
 }
+
+.hero-scroll-cue {
+  position: absolute;
+  bottom: var(--space-lg);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  transition: opacity var(--transition);
+  z-index: 2;
+}
+.hero-scroll-cue:hover { opacity: 1; }
+.hero-scroll-cue svg {
+  animation: scroll-bounce 1.8s ease-in-out infinite;
+}
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50%      { transform: translateY(6px); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-scroll-cue svg { animation: none; }
+}
 /* ============================================================
    TOPO CANVAS
 ============================================================ */
@@ -339,6 +369,33 @@ ul { list-style: none; }
 }
 .exp-company { color: var(--accent); font-size: 0.875rem; margin-bottom: var(--space-sm); }
 .exp-body { color: var(--text-secondary); font-size: 0.9rem; }
+
+.exp-list {
+  list-style: none;
+  margin-top: var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.exp-list li {
+  position: relative;
+  padding-left: 16px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+.exp-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.7;
+}
+
 .tag-row {
   display: flex;
   flex-wrap: wrap;
@@ -416,7 +473,39 @@ ul { list-style: none; }
   color: var(--text-muted);
 }
 .project-title { font-weight: 600; font-size: 1rem; }
-.project-desc { font-size: 0.875rem; color: var(--text-secondary); flex: 1; }
+.project-desc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+.project-stats {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+.project-stats li {
+  position: relative;
+  padding-left: 14px;
+  font-size: 0.825rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.project-stats li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.7;
+}
+.project-stats li strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
 .project-footer {
   display: flex;
   justify-content: space-between;
@@ -525,6 +614,21 @@ ul { list-style: none; }
   transition: color var(--transition);
 }
 .footer-links a:hover { color: var(--text-secondary); }
+
+.exp-badge-current {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-dim);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-sm);
+  padding: 2px 7px;
+  margin-left: var(--space-sm);
+  vertical-align: middle;
+}
 
 /* ============================================================
    DIVIDER
