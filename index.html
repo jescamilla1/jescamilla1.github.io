@@ -56,10 +56,17 @@
       </p>
 
       <div class="hero-links">
-        <a href="#projects" class="btn btn-primary">See my work</a>
-        <a href="https://github.com/jescamilla1/jescamilla1" target="_blank" rel="noopener" class="btn btn-ghost">GitHub ↗</a>
-        <a href="https://www.linkedin.com/in/jescamilla1/" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn ↗</a>
+          <a href="#projects" class="btn btn-primary">See my work</a>
+          <a href="https://github.com/jescamilla1/jescamilla1" target="_blank" rel="noopener" class="btn btn-ghost">GitHub ↗</a>
+          <a href="https://www.linkedin.com/in/jescamilla1/" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn ↗</a>
+        </div>
       </div>
+      <a href="#experience" class="hero-scroll-cue" aria-label="Scroll to content">
+        <span>Scroll</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 5v14M19 12l-7 7-7-7"/>
+        </svg>
+      </a>
     </div>
   </section>
 
@@ -77,25 +84,28 @@
 <!-- EXPERIENCE ITEM — duplicate this block to add more -->
       <div class="exp-item">
         <div class="exp-meta">
-          <span class="exp-role">Software Engineer</span>
+          <span class="exp-role">Software Engineer<span class="exp-badge-current">Current</span></span>
           <span class="exp-period">Jan 2023 — present</span>
         </div>
         <p class="exp-company">RDE Systems</p>
         <p class="exp-body">
-          Built and shipped new data-entry screens, reports, and functional modules for an HIV/AIDS
-          electronic medical records platform. Became the subject matter expert on the Medication
-          Adherence application across multiple framework iterations, keeping it stable through every
-          migration. Redesigned company and conference pages, establishing a consistent visual system.
-          Led a university capstone event — selected and mentored a team of 5 developers in an
-          internship-style engagement, then hired one into a junior role and guided their onboarding.
+          Subject matter expert on the Medication Adherence module of an HIV/AIDS electronic
+          medical records platform, building AI-augmented tools that solve real team bottlenecks.
         </p>
+        <ul class="exp-list">
+          <li>Built and ship data-entry screens, reports, and functional modules; kept the Medication Adherence app stable across multiple framework migrations.</li>
+          <li>Built an agent that encodes the codebase's unwritten SQL conventions — cuts routine script time in half, complex schema-design tasks by a similar margin.</li>
+          <li>Built a second agent that audits code against WCAG rules and proposes phased, human-approved fixes — applied to a 10-file module in ~1 hour vs. a 50+ hour manual baseline.</li>
+          <li>Part of an inaugural UX/UI initiative tackling 30 years of design debt; proposed an org-wide design documentation standard.</li>
+          <li>Selected and mentored a 5-developer university capstone team, hiring one into a junior role.</li>
+        </ul>
         <div class="tag-row">
           <span class="tag tag-lang">ColdFusion</span>
           <span class="tag tag-lang">SQL Server</span>
           <span class="tag tag-lang">JavaScript</span>
-          <span class="tag tag-framework">jQuery</span>
+          <span class="tag tag-tool">GitHub Copilot</span>
+          <span class="tag tag-concept">Agentic AI</span>
           <span class="tag tag-concept">ADA / WCAG</span>
-          <span class="tag tag-tool">SVN</span>
         </div>
       </div>
 
@@ -159,11 +169,11 @@
         <div class="project-card">
           <span class="project-num">01</span>
           <h3 class="project-title">AI-Assisted Trading Indicators</h3>
-          <p class="project-desc">
-            Custom Pine Script indicators built with AI to apply statistical analysis and identify
-            key trading zones. Shared publicly with a Discord trading community of 3,000+ members.
-            Actively maintained with ongoing development.
-          </p>
+          <p class="project-desc">Custom Pine Script indicators built with AI for statistical analysis and trading-zone detection.</p>
+          <ul class="project-stats">
+            <li><strong>3,000+</strong> member Discord trading community using it</li>
+            <li>Actively maintained, ongoing development</li>
+          </ul>
           <div class="tag-row">
             <span class="tag tag-lang">Pine Script</span>
             <span class="tag tag-tool">TradingView</span>
@@ -179,11 +189,11 @@
         <div class="project-card">
           <span class="project-num">02</span>
           <h3 class="project-title">Personal AI Assistant (Local Agent)</h3>
-          <p class="project-desc">
-            A self-hosted AI agent running on a local Mac Mini via Ollama, orchestrated through
-            ClawdBot. Architected from scratch — skill modules, memory management, token optimization.
-            Privacy-focused, handles real personal and work workflows.
-          </p>
+          <p class="project-desc">A self-hosted AI agent on a local Mac Mini via Ollama, orchestrated through ClawdBot.</p>
+          <ul class="project-stats">
+            <li>Architected from scratch — <strong>skill modules</strong>, memory management, token optimization</li>
+            <li>Privacy-focused, handles real personal and work workflows</li>
+          </ul>
           <div class="tag-row">
             <span class="tag tag-tool">Ollama</span>
             <span class="tag tag-concept">Agentic AI</span>
@@ -198,17 +208,37 @@
 
         <div class="project-card">
           <span class="project-num">03</span>
-          <h3 class="project-title">ADA Compliance Triage System</h3>
-          <p class="project-desc">
-            A structured approach to WCAG remediation across a legacy ColdFusion codebase.
-            Four-tier blast-radius classification (SVN externals → framework → shared groups →
-            standalone pages) reduced risk while enabling parallel team workstreams.
-          </p>
+          <h3 class="project-title">ADA Compliance Agent</h3>
+          <p class="project-desc">Audits code against WCAG rules and proposes fixes — never applies a change without approval.</p>
+          <ul class="project-stats">
+            <li><strong>10 files</strong> remediated in ~1 hour vs. a 50+ hour manual baseline</li>
+            <li>Outputs a feasibility/impact table with phased plan + projected compliance score</li>
+          </ul>
           <div class="tag-row">
+            <span class="tag tag-tool">GitHub Copilot</span>
+            <span class="tag tag-concept">Agentic AI</span>
             <span class="tag tag-concept">Accessibility</span>
-            <span class="tag tag-concept">Architecture</span>
-            <span class="tag tag-lang">ColdFusion</span>
             <span class="tag tag-concept">WCAG</span>
+          </div>
+          <div class="project-footer">
+            <div></div>
+            <a href="#writing" class="project-link">Read writeup →</a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <span class="project-num">04</span>
+          <h3 class="project-title">SQL Convention Agent</h3>
+          <p class="project-desc">Encodes a legacy codebase's unwritten SQL conventions so generated scripts follow team standards.</p>
+          <ul class="project-stats">
+            <li>Routine scripts: <strong>~20 min → under 10</strong></li>
+            <li>Complex backfill/FK task: <strong>~40 hrs → ~20 hrs</strong>, via live-schema verification before structural decisions</li>
+          </ul>
+          <div class="tag-row">
+            <span class="tag tag-tool">GitHub Copilot</span>
+            <span class="tag tag-lang">SQL Server</span>
+            <span class="tag tag-concept">Agentic AI</span>
+            <span class="tag tag-concept">Prompt Engineering</span>
           </div>
           <div class="project-footer">
             <div></div>
@@ -267,10 +297,30 @@
         </li>
 
         <li>
-          <a href="articles/ada-triage.html" class="article-item">
+          <a href="articles/ada-agent.html" class="article-item">
             <div>
-              <p class="article-title">Triage before you fix: a blast-radius model for ADA compliance</p>
-              <p class="article-teaser">Why touching shared components first is the fastest way to break everything.</p>
+              <p class="article-title">An ADA compliance agent that won't touch code without asking</p>
+              <p class="article-teaser">Why the human-approval step is the feature, not a limitation.</p>
+            </div>
+            <span class="article-date">Coming soon</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="articles/sql-convention-agent.html" class="article-item">
+            <div>
+              <p class="article-title">Teaching an agent your codebase's unwritten SQL rules</p>
+              <p class="article-teaser">Convention extraction, schema verification loops, and where the time actually goes.</p>
+            </div>
+            <span class="article-date">Coming soon</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="articles/ai-judgment-thesis.html" class="article-item">
+            <div>
+              <p class="article-title">AI doesn't replace judgment — it changes where you spend it</p>
+              <p class="article-teaser">What two agents I built taught me about deciding when AI should act alone.</p>
             </div>
             <span class="article-date">Coming soon</span>
           </a>
@@ -291,7 +341,9 @@
         <h2 class="t-headline">Let's talk.</h2>
         <p>Open to full-time roles, contract work, and interesting problems. Reach out directly.</p>
         <div class="contact-links">
-<a href="mailto:joan.escamilla1@gmail.com" class="btn btn-primary">Send an email</a>          <a href="https://www.linkedin.com/in/jescamilla1/" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn ↗</a>
+          <a href="mailto:joan.escamilla1@gmail.com" class="btn btn-primary">Send an email</a>
+          <a href="/assets/resume.pdf" target="_blank" rel="noopener" class="btn btn-ghost">Resume ↓</a>
+          <a href="https://www.linkedin.com/in/jescamilla1/" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn ↗</a>
           <a href="https://github.com/jescamilla1/jescamilla1" target="_blank" rel="noopener" class="btn btn-ghost">GitHub ↗</a>
         </div>
       </div>
