@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ElCesina — Developer</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       NAV
+  ============================================================ -->
+  <nav id="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo" aria-label="Joan Escamilla — home">
+        <span class="nav-logo-text">Joan.Escamilla</span>
+      </a>
+      <div class="nav-links">
+        <a href="#experience" data-section="experience">Experience</a>
+        <a href="#projects"   data-section="projects">Projects</a>
+        <a href="#writing"    data-section="writing">Writing</a>
+        <a href="#contact"    data-section="contact">Contact</a>
+        <button id="theme-toggle" aria-label="Toggle theme">light</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <section id="hero">
+    <canvas id="topo-canvas" aria-hidden="true"></canvas>
+    <div class="container">
+      <div class="hero-eyebrow">
+        <span class="hero-dot" aria-hidden="true"></span>
+        <span class="t-label" style="letter-spacing:0.1em;">Available for opportunities</span>
+      </div>
+
+      <h1 class="t-display hero-title">
+        Hi, I'm Joan.<br />
+        I build <em>AI-powered systems</em><br />
+        and ship things that work.
+      </h1>
+
+      <p class="hero-sub">
+        Full-stack developer with 3+ years in production software. I embed AI into real workflows,
+        build agent systems from the ground up, and care about how people actually interact with what I ship.
+      </p>
+
+      <div class="hero-links">
+        <a href="#projects" class="btn btn-primary">See my work</a>
+        <a href="https://github.com/jescamilla1/jescamilla1" target="_blank" rel="noopener" class="btn btn-ghost">GitHub ↗</a>
+        <a href="https://www.linkedin.com/in/jescamilla1/" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       EXPERIENCE
+  ============================================================ -->
+  <section id="experience" class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="t-label">Background</p>
+        <div class="divider"></div>
+        <h2 class="t-headline">Experience</h2>
+      </div>
+
+<!-- EXPERIENCE ITEM — duplicate this block to add more -->
+      <div class="exp-item">
+        <div class="exp-meta">
+          <span class="exp-role">Software Engineer</span>
+          <span class="exp-period">Jan 2023 — present</span>
+        </div>
+        <p class="exp-company">RDE Systems</p>
+        <p class="exp-body">
+          Built and shipped new data-entry screens, reports, and functional modules for an HIV/AIDS
+          electronic medical records platform. Became the subject matter expert on the Medication
+          Adherence application across multiple framework iterations, keeping it stable through every
+          migration. Redesigned company and conference pages, establishing a consistent visual system.
+          Led a university capstone event — selected and mentored a team of 5 developers in an
+          internship-style engagement, then hired one into a junior role and guided their onboarding.
+        </p>
+        <div class="tag-row">
+          <span class="tag tag-lang">ColdFusion</span>
+          <span class="tag tag-lang">SQL Server</span>
+          <span class="tag tag-lang">JavaScript</span>
+          <span class="tag tag-framework">jQuery</span>
+          <span class="tag tag-concept">ADA / WCAG</span>
+          <span class="tag tag-tool">SVN</span>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <span class="exp-role">Programming Tutor</span>
+          <span class="exp-period">Sep 2021 — Jul 2023</span>
+        </div>
+        <p class="exp-company">The Coder School — Short Hills, NJ</p>
+        <p class="exp-body">
+          Designed and taught project-based curricula in React, Python, and Java for students ages 7–21.
+          Tracked progress across 20+ students and delivered structured feedback to parents monthly.
+          Students averaged a 30% improvement in programming skills by internal metrics.
+        </p>
+        <div class="tag-row">
+          <span class="tag tag-framework">React</span>
+          <span class="tag tag-lang">Python</span>
+          <span class="tag tag-lang">Java</span>
+          <span class="tag tag-concept">Curriculum design</span>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <span class="exp-role">Frontend Developer Intern</span>
+          <span class="exp-period">Jun 2022 — Aug 2022</span>
+        </div>
+        <p class="exp-company">MetroStar</p>
+        <p class="exp-body">
+          Built Tableau dashboards visualizing Census data for city planners and economic development
+          stakeholders. Converted the Tableau JS API into reusable React components to reduce
+          integration overhead. Also built a React app for testing and demoing API endpoints,
+          which accelerated bug identification across the team.
+        </p>
+        <div class="tag-row">
+          <span class="tag tag-framework">React</span>
+          <span class="tag tag-tool">Tableau</span>
+          <span class="tag tag-tool">Census API</span>
+          <span class="tag tag-framework">JavaScript</span>
+        </div>
+      </div>
+      <!-- END EXPERIENCE ITEMS -->
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROJECTS
+  ============================================================ -->
+  <section id="projects" class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="t-label">Selected work</p>
+        <div class="divider"></div>
+        <h2 class="t-headline">Projects</h2>
+      </div>
+
+      <div class="projects-grid">
+
+       <!-- PROJECT CARD — duplicate to add more -->
+        <div class="project-card">
+          <span class="project-num">01</span>
+          <h3 class="project-title">AI-Assisted Trading Indicators</h3>
+          <p class="project-desc">
+            Custom Pine Script indicators built with AI to apply statistical analysis and identify
+            key trading zones. Shared publicly with a Discord trading community of 3,000+ members.
+            Actively maintained with ongoing development.
+          </p>
+          <div class="tag-row">
+            <span class="tag tag-lang">Pine Script</span>
+            <span class="tag tag-tool">TradingView</span>
+            <span class="tag tag-concept">Prompt Engineering</span>
+            <span class="tag tag-concept">Technical Analysis</span>
+          </div>
+          <div class="project-footer">
+            <div></div>
+            <a href="#writing" class="project-link">Read writeup →</a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <span class="project-num">02</span>
+          <h3 class="project-title">Personal AI Assistant (Local Agent)</h3>
+          <p class="project-desc">
+            A self-hosted AI agent running on a local Mac Mini via Ollama, orchestrated through
+            ClawdBot. Architected from scratch — skill modules, memory management, token optimization.
+            Privacy-focused, handles real personal and work workflows.
+          </p>
+          <div class="tag-row">
+            <span class="tag tag-tool">Ollama</span>
+            <span class="tag tag-concept">Agentic AI</span>
+            <span class="tag tag-tool">Open Source</span>
+            <span class="tag tag-lang">Python</span>
+          </div>
+          <div class="project-footer">
+            <div></div>
+            <a href="#writing" class="project-link">Read writeup →</a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <span class="project-num">03</span>
+          <h3 class="project-title">ADA Compliance Triage System</h3>
+          <p class="project-desc">
+            A structured approach to WCAG remediation across a legacy ColdFusion codebase.
+            Four-tier blast-radius classification (SVN externals → framework → shared groups →
+            standalone pages) reduced risk while enabling parallel team workstreams.
+          </p>
+          <div class="tag-row">
+            <span class="tag tag-concept">Accessibility</span>
+            <span class="tag tag-concept">Architecture</span>
+            <span class="tag tag-lang">ColdFusion</span>
+            <span class="tag tag-concept">WCAG</span>
+          </div>
+          <div class="project-footer">
+            <div></div>
+            <a href="#writing" class="project-link">Read writeup →</a>
+          </div>
+        </div>
+
+        <!-- ADD MORE CARDS HERE -->
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       WRITING
+  ============================================================ -->
+  <section id="writing" class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="t-label">Articles</p>
+        <div class="divider"></div>
+        <h2 class="t-headline">Writing</h2>
+      </div>
+
+      <ul class="article-list" role="list">
+
+<!-- ARTICLE ITEM — duplicate to add more -->
+        <li>
+          <a href="articles/local-ai-agent.html" class="article-item">
+            <div>
+              <p class="article-title">Building a local AI agent from scratch with Ollama and ClawdBot</p>
+              <p class="article-teaser">Skill modules, memory architecture, and why I stopped relying on the cloud.</p>
+            </div>
+            <span class="article-date">Coming soon</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="articles/medication-adherence.html" class="article-item">
+            <div>
+              <p class="article-title">Owning a legacy app across four framework migrations</p>
+              <p class="article-teaser">What it actually means to be the subject matter expert on software older than you'd like.</p>
+            </div>
+            <span class="article-date">Coming soon</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="articles/harmonic-patterns.html" class="article-item">
+            <div>
+              <p class="article-title">How I built a harmonic pattern detector in Pine Script</p>
+              <p class="article-teaser">Ratio math, pattern memory, and staying under TradingView's token limit.</p>
+            </div>
+            <span class="article-date">Coming soon</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="articles/ada-triage.html" class="article-item">
+            <div>
+              <p class="article-title">Triage before you fix: a blast-radius model for ADA compliance</p>
+              <p class="article-teaser">Why touching shared components first is the fastest way to break everything.</p>
+            </div>
+            <span class="article-date">Coming soon</span>
+          </a>
+        </li>
+
+        <!-- ADD MORE ARTICLES HERE -->
+
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONTACT
+  ============================================================ -->
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="contact-inner">
+        <h2 class="t-headline">Let's talk.</h2>
+        <p>Open to full-time roles, contract work, and interesting problems. Reach out directly.</p>
+        <div class="contact-links">
+<a href="mailto:joan.escamilla1@gmail.com" class="btn btn-primary">Send an email</a>          <a href="https://www.linkedin.com/in/jescamilla1/" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn ↗</a>
+          <a href="https://github.com/jescamilla1/jescamilla1" target="_blank" rel="noopener" class="btn btn-ghost">GitHub ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <span class="footer-copy">© 2026 Joan Escamilla — built from scratch</span>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/jescamilla1/" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn ↗</a>
+        <a href="https://github.com/jescamilla1/jescamilla1" target="_blank" rel="noopener" class="btn btn-ghost">GitHub ↗</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts — loaded at end of body so DOM is ready -->
+  <script src="index.js"></script>
+
+</body>
+</html>
