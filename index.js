@@ -5,17 +5,29 @@ const nav      = document.getElementById('nav');
 const navLinks = document.querySelectorAll('.nav-links a[data-section]');
 const sections = document.querySelectorAll('section[id]');
 
-const sectionObserver = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      navLinks.forEach(l => l.classList.remove('active'));
-      const match = document.querySelector(`.nav-links a[data-section="${e.target.id}"]`);
-      if (match) match.classList.add('active');
-    }
-  });
-}, { rootMargin: '-40% 0px -55% 0px' });
+function updateActiveSection() {
+  const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+  let current;
 
-sections.forEach(s => sectionObserver.observe(s));
+  if (atBottom) {
+    current = sections[sections.length - 1];
+  } else {
+    const offset = 120;
+    current = sections[0];
+    sections.forEach(section => {
+      if (section.getBoundingClientRect().top <= offset) {
+        current = section;
+      }
+    });
+  }
+
+  navLinks.forEach(l => l.classList.remove('active'));
+  const match = document.querySelector(`.nav-links a[data-section="${current.id}"]`);
+  if (match) match.classList.add('active');
+}
+
+window.addEventListener('scroll', updateActiveSection, { passive: true });
+updateActiveSection();
 
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 8);
@@ -338,7 +350,8 @@ requestAnimationFrame(() => {
     const dot = document.createElement('button');
     dot.className = 'exp-rail-dot';
     dot.setAttribute('aria-label', item.querySelector('.exp-role')?.textContent.trim() || `Experience ${i + 1}`);
-    if (item.classList.contains('is-expanded')) dot.classList.add('is-active');
+    if (item.querySelector('.exp-badge-current')) dot.classList.add('is-current');
+    if (item.classList.contains('is-expanded')) dot.classList.add('is-open');
     dotsContainer.appendChild(dot);
     dots.push(dot);
 
@@ -346,26 +359,61 @@ requestAnimationFrame(() => {
     item.querySelector('.exp-toggle')?.addEventListener('click', () => toggleItem(i));
   });
 
-  function positionDots() {
-    const railHeight = dotsContainer.parentElement.offsetHeight;
-    items.forEach((item, i) => {
-      const itemTop = item.offsetTop;
-      const itemHeight = item.querySelector('.exp-toggle').offsetHeight;
-      const centerY = itemTop + itemHeight / 2 - 9; /* 9 = half dot height */
-      dots[i].style.top = `${centerY}px`;
-    });
-  }
-
   function toggleItem(i) {
     const item = items[i];
     const expanded = item.classList.toggle('is-expanded');
     item.querySelector('.exp-toggle')?.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-    dots[i].classList.toggle('is-active', expanded);
-    /* recalc positions after the expand/collapse transition finishes */
-    setTimeout(positionDots, 360);
+    dots[i].classList.toggle('is-open', expanded);
+    animatePositionDots();
+  }
+
+  function animatePositionDots() {
+    const duration = 400;
+    const start = performance.now();
+    function step(now) {
+      positionDots();
+      if (now - start < duration) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  function positionDots() {
+    const railRect = dotsContainer.getBoundingClientRect();
+    items.forEach((item, i) => {
+      const toggle = item.querySelector('.exp-toggle');
+      const toggleRect = toggle.getBoundingClientRect();
+      const centerY = (toggleRect.top - railRect.top) + toggleRect.height / 2 - 9;
+      dots[i].style.top = `${centerY}px`;
+    });
   }
 
   positionDots();
   window.addEventListener('resize', positionDots, { passive: true });
   setTimeout(positionDots, 50); /* catch late font/layout shifts */
+})();
+
+/* ============================================================
+   MOBILE NAV MENU TOGGLE
+============================================================ */
+(function initMobileNav() {
+  const menuToggle = document.getElementById('nav-menu-toggle');
+  const links = document.querySelector('.nav-links');
+  if (!menuToggle || !links) return;
+
+  function setOpen(open) {
+    links.classList.toggle('is-open', open);
+    menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  menuToggle.addEventListener('click', () => {
+    setOpen(!links.classList.contains('is-open'));
+  });
+
+  links.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => setOpen(false));
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setOpen(false);
+  });
 })();
