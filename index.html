@@ -31,6 +31,9 @@
         <a href="#contact"    data-section="contact">Contact</a>
         <button id="theme-toggle" aria-label="Toggle theme">light</button>
       </div>
+      <button id="nav-menu-toggle" class="nav-menu-toggle" aria-label="Open menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
     </div>
   </nav>
 
@@ -46,15 +49,11 @@
           <span class="t-label" style="letter-spacing:0.1em;">Available for opportunities</span>
         </div>
 
-        <h1 class="t-display hero-title">
-          Hi, I'm Joan.<br />
-          I build <em>AI-powered systems</em><br />
-          and ship things that work.
-        </h1>
+        <h1 class="t-display hero-title">Hi, I'm Joan.</h1>
+        <p class="hero-tagline">I don't trust a fix until I know why it works.</p>
 
         <p class="hero-sub">
-          Full-stack developer with 3+ years in production software, the kind that mostly
-          means understanding systems other people gave up trying to understand.
+          Full-stack developer, 3+ years in production software. Lately that means building the AI tools that get me to "why" faster — agents that audit code, write SQL, and read charts.
         </p>
 
         <div class="hero-links">
@@ -69,18 +68,6 @@
           </a>
         </div>
       </div>
-
-      <div class="hero-side">
-        <div class="hero-card">
-          <p class="hero-card-label">Why AI, specifically</p>
-          <p class="hero-card-text">
-            Not for the output — for the leverage. AI gets an idea into something
-            real fast enough that I can start asking <em>why does this actually work</em>,
-            same question I ask in code review, same one I'm asking mid-roll in BJJ.
-          </p>
-        </div>
-      </div>
-
     </div>
     <a href="#about" class="hero-scroll-cue" aria-label="Scroll to content">
       <span>Scroll</span>
@@ -104,33 +91,18 @@
       <div class="about-layout">
         <div class="about-body">
           <p>
-            I'm slow to start on anything new — I don't move until I understand
-            why something works, not just that it does. In BJJ and boxing I'd
-            rather be on the receiving end of a technique first, feel what it's
-            supposed to do, before I try to throw it myself. In code review I'm
-            the one asking why this approach and not another, even when the
-            fix already works. Trading's the same itch: it's less about the
-            trade and more about understanding the mechanism well enough to
-            trust it.
+            I don't move on anything new until I understand why it works, not just that it does. I like to focus on the techniques, and once I understand how something works
+            , I run with it. In code review I'm the one asking why this approach and not another, even when the fix already works.
           </p>
           <p>
             That front-loaded curiosity is also why AI ended up central to how I
             build — not as a shortcut around understanding, but as the fastest
             way to get an idea into something tangible enough to interrogate.
           </p>
-          <p>
-            Outside of all that: still working through a list of places I want
-            to see in person before I theorize about them any further —
-            pyramids, ruins, the stuff that's been sitting there for thousands
-            of years not explaining itself.
-          </p>
         </div>
       </div>
     </div>
   </section>
-  <!-- ============================================================
-       EXPERIENCE
-  ============================================================ -->
 <!-- ============================================================
        EXPERIENCE
   ============================================================ -->
@@ -151,15 +123,22 @@
 
           <div class="exp-item is-expanded">
             <button class="exp-toggle" aria-expanded="true">
-              <div class="exp-meta">
-                <span class="exp-role">Software Engineer<span class="exp-badge-current">Current</span></span>
-                <span class="exp-period">Jan 2023 — present</span>
+              <div class="exp-toggle-row">
+                <div class="exp-logo" aria-hidden="true">
+                  <img src="logos/RDE.png" alt="">
+                </div>
+                <div class="exp-toggle-content">
+                  <div class="exp-meta">
+                    <span class="exp-role">Software Engineer<span class="exp-badge-current">Current</span></span>
+                    <span class="exp-period">Jan 2023 — present</span>
+                  </div>
+                  <p class="exp-company">RDE Systems</p>
+                  <p class="exp-body">
+                    Subject matter expert on the Medication Adherence module of an HIV/AIDS electronic
+                    medical records platform, building AI-augmented tools that solve real team bottlenecks.
+                  </p>
+                </div>
               </div>
-              <p class="exp-company">RDE Systems</p>
-              <p class="exp-body">
-                Subject matter expert on the Medication Adherence module of an HIV/AIDS electronic
-                medical records platform, building AI-augmented tools that solve real team bottlenecks.
-              </p>
               <svg class="exp-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
             </button>
             <div class="exp-details">
@@ -183,14 +162,21 @@
 
           <div class="exp-item">
             <button class="exp-toggle" aria-expanded="false">
-              <div class="exp-meta">
-                <span class="exp-role">Programming Tutor</span>
-                <span class="exp-period">Sep 2021 — Jul 2023</span>
+              <div class="exp-toggle-row">
+                <div class="exp-logo" aria-hidden="true">
+                  <img src="logos/TCS.png" alt="">
+                </div>
+                <div class="exp-toggle-content">
+                  <div class="exp-meta">
+                    <span class="exp-role">Programming Tutor</span>
+                    <span class="exp-period">Sep 2021 — Jul 2023</span>
+                  </div>
+                  <p class="exp-company">The Coder School — Short Hills, NJ</p>
+                  <p class="exp-body">
+                    Designed and taught project-based curricula in React, Python, and Java for students ages 7–21.
+                  </p>
+                </div>
               </div>
-              <p class="exp-company">The Coder School — Short Hills, NJ</p>
-              <p class="exp-body">
-                Designed and taught project-based curricula in React, Python, and Java for students ages 7–21.
-              </p>
               <svg class="exp-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
             </button>
             <div class="exp-details">
@@ -209,14 +195,21 @@
 
           <div class="exp-item">
             <button class="exp-toggle" aria-expanded="false">
-              <div class="exp-meta">
-                <span class="exp-role">Frontend Developer Intern</span>
-                <span class="exp-period">Jun 2022 — Aug 2022</span>
+              <div class="exp-toggle-row">
+                <div class="exp-logo" aria-hidden="true">
+                  <img src="logos/MetroStar.svg" alt="">
+                </div>
+                <div class="exp-toggle-content">
+                  <div class="exp-meta">
+                    <span class="exp-role">Frontend Developer Intern</span>
+                    <span class="exp-period">Jun 2022 — Aug 2022</span>
+                  </div>
+                  <p class="exp-company">MetroStar</p>
+                  <p class="exp-body">
+                    Built Tableau dashboards visualizing Census data for city planners and economic development stakeholders.
+                  </p>
+                </div>
               </div>
-              <p class="exp-company">MetroStar</p>
-              <p class="exp-body">
-                Built Tableau dashboards visualizing Census data for city planners and economic development stakeholders.
-              </p>
               <svg class="exp-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
             </button>
             <div class="exp-details">
