@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How I Built a Harmonic Pattern Detector in Pine Script — Joan Escamilla</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../index.css" />
+</head>
+<body>
+
+  <nav id="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo" aria-label="Joan Escamilla — home">
+        <span class="nav-logo-text">Joan.Escamilla</span>
+      </a>
+      <div class="nav-links">
+        <a href="../index.html#about" data-section="about">About</a>
+        <a href="../index.html#experience" data-section="experience">Experience</a>
+        <a href="../index.html#projects" data-section="projects">Projects</a>
+        <a href="../index.html#writing" data-section="writing" class="active">Writing</a>
+        <a href="../index.html#contact" data-section="contact">Contact</a>
+        <button id="theme-toggle" aria-label="Toggle theme">light</button>
+      </div>
+      <button id="nav-menu-toggle" class="nav-menu-toggle" aria-label="Open menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="article-header">
+    <div class="container">
+      <a href="../index.html#writing" class="article-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to Writing
+      </a>
+      <p class="t-label">Writeup</p>
+      <h1 class="article-page-title">How I built a harmonic pattern detector in Pine Script</h1>
+      <div class="article-meta-row">
+        <span>6/22/2026</span>
+        <span>·</span>
+        <span>~9 min read</span>
+      </div>
+    </div>
+  </header>
+
+  <article class="article-content">
+
+    <p>
+      I learn most of my technical analysis from a YouTuber who draws harmonic patterns the way someone draws after years of doing it — fast, by feel, no hesitation. I don't have that. I've spent real time trying to spot Gartleys and Crabs on a chart the way he does, and I'm just not as good at it. There are harmonic indicators on TradingView, but none of them followed his specific rules — his ratio definitions, his tolerance bands, his sense of which patterns are reliable enough to act on. One member of his Discord built a version that did follow those rules. It's also private. I could watch it work. I couldn't open it up and learn from it, and I definitely couldn't build on top of it.
+    </p>
+    <p>
+      So the problem wasn't that the rules didn't exist. It was that I had a system I could see the output of, but not a way to build against it myself. That's what sent me into Pine Script trying to reverse-engineer the thing on my own.
+    </p>
+
+    <h2>The rulebook I could see but not run</h2>
+    <p>
+      The mentor's framework isn't vague. It's eight specific harmonic patterns — Gartley, Bat, Alt Bat, Butterfly, Deep Butterfly, Crab, Deep Crab, Shark — each with its own Fibonacci ratios at every leg, plus stated tolerance bands at 5% and 10% for how far price is allowed to drift from the "ideal" ratio before the pattern's no longer valid. It's a real rulebook, not an impression.
+    </p>
+    <p>
+      What I didn't have was code that actually checked a live chart against that rulebook. The public scripts on TradingView use a more generic six-pattern set and don't score against any specific tolerance system. The Discord member's script does follow the mentor's rules — but since it's closed-source, the only thing I could compare myself against was its output, not its logic.
+    </p>
+
+    <h2>Starting from someone else's code</h2>
+    <p>
+      I didn't start from a blank file. There's a public-domain Pine Script harmonic detector — six pattern types, decent at drawing XABCD structures, with no concept of the mentor's specific ratio framework layered on top. That was my starting point, and the work was less "write a harmonic indicator" and more "take this, and rebuild it until it actually implements the rules I'm trying to learn."
+    </p>
+    <p>
+      The first thing that had to change was the pattern set itself. The original script covers Gartley, Bat, Butterfly, Crab, Shark, and Cypher. The mentor's framework doesn't include Cypher, and it does include three patterns the original script never touched — Alt Bat, Deep Butterfly, Deep Crab. So before any of the harder rework started, I was already changing what the indicator could even detect.
+    </p>
+
+    <h2>Why a global find-and-replace wasn't enough</h2>
+    <p>
+      The original code hardcodes each pattern type into its own named array and its own branch of logic, repeated in four or five different places — once for storage, once for coloring, once for the symbol shown in a label, once for target calculation. That works fine when your pattern types are six small, contiguous numbers. The moment I dropped one type and added three with non-contiguous IDs, every one of those hardcoded branches needed new cases, by hand, in every location.
+    </p>
+    <p>
+      I replaced that with a single lookup — a function that maps each pattern type ID onto a dense index, and everything else (colors, names, symbols, stored arrays) reads off that index instead of switching on the raw type. Add a ninth pattern later, and it's one new line in one place, not five new branches scattered through the file.
+    </p>
+    <p>
+      Something similar was true of how the original script drew the lines connecting each leg of a pattern. It assumed a leg was always sitting at a fixed position in an array — leg three is always the X-A line, leg four is always the C-D line, and so on. That assumption breaks the moment pattern types start sharing drawing logic across different shapes. I rewrote it to check actual coordinates first — does this line's start and end points actually match the X-A leg's coordinates — and only fall back to positional guessing if that check fails. Slower to write, much harder to silently get wrong.
+    </p>
+
+    <h2>The bias I didn't expect to find</h2>
+    <p>
+      Once I started testing the rebuild against real charts, I noticed it kept favoring one harmonic shape over others when multiple patterns were plausible in the same zone. I went looking for where that preference was coded in — and it wasn't. The original script had no tie-break logic at all. When more than one pattern type matched the same price structure, whichever one happened to be checked first in a hardcoded list order won, every time. It wasn't bias from a bad rule. It was the complete absence of one.
+    </p>
+    <p>
+      The fix was to actually score candidates against each other — rank every matching pattern type by how closely its key ratio fits the ideal Fibonacci level, and only keep the best fit. It's a small function, but it's the difference between "this happens to be the pattern my code checks first" and "this is the pattern that actually fits the data best."
+    </p>
+    <p>
+      A second, related bug showed up once patterns started getting replaced by better-scoring ones: the lines and shaded fills from the discarded pattern sometimes stuck around on the chart after the pattern itself was gone. Every place that could delete a pattern needed to also clean up its drawings, and a couple of paths didn't. I routed all of it through one shared cleanup function instead of leaving each deletion path responsible for remembering to do it itself.
+    </p>
+
+    <h2>Why the loop looks uglier than it should</h2>
+    <p>
+      Pine Script doesn't allow recursion, and a script needs to scan for patterns at every pivot length from 3 bars up to 20. The clean way to write that is a loop. The actual way you have to write that in Pine, if you don't want every length re-evaluating and redrawing on every pass through a shared loop body, is eighteen explicit calls, each gated by its own <code>if</code>. It reads like something nobody bothered to clean up. It's actually the version that doesn't redraw the same pattern eighteen times a bar.
+    </p>
+    <p>
+      The real fix for "slow to load" wasn't the loop shape — it was adding a minimum pivot length floor so the script skips scanning lengths nobody asked for in the first place, instead of always checking the full 3-to-20 range regardless of settings.
+    </p>
+    <p>
+      One more simplification, smaller but worth mentioning: the original script let you configure separate profit targets for every one of its six pattern types independently — six pairs of dropdown menus, each with over a dozen options. I collapsed all of that into a single shared calculation: a Fibonacci extension measured from point D, using the same two ratios for every pattern type. It's less configurable. It's also a fraction of the code, easier to reason about, and one less place per pattern type for something to quietly drift out of sync with the rest of the script.
+    </p>
+
+    <h2>Proving the math instead of trusting it</h2>
+    <p>
+      I don't have the mentor's years of manually reading charts, and the Discord member's implementation is closed-source, so I couldn't check my detection logic against either of those directly. What I could check it against was the math itself.
+    </p>
+    <p>
+      Every detected leg gets compared against the mentor's own tolerance bands — does this ratio actually land inside the 5% or 10% window his framework defines, or is it outside the range entirely. That's not a vibe check. It's a direct comparison against stated numbers. On top of that, I ran my version side-by-side with the Discord member's script on the same chart, same time window, and compared the resulting stats tables — not to copy his numbers, but as the closest available reference point for whether the two implementations were finding equivalent zones.
+    </p>
+    <p>
+      Years of stats and data science coursework is what made that feel like enough. An indicator is applied statistics — the same way a calculator doesn't need to have "lived" a math problem to solve it correctly, code doesn't need a decade of chart reps to apply a stated ratio rule correctly. I didn't need his eye. I needed the math to check out, and a way to confirm it did.
+    </p>
+
+    <h2>What "historical outcome" actually tracks</h2>
+    <p>
+      Every completed pattern gets a profit target derived from a Fibonacci extension measured from its own low to its own high — not a fixed percentage, a ratio specific to that pattern's own geometry. The stats table tracks, for every historical instance of a given pattern type, how often price actually reached that target, and reports a weighted average return across all of them. So "this is a Gartley" isn't the end of the output — the table next to it says how often a Gartley on this exact chart, with these exact legs, has actually paid off.
+    </p>
+
+    <h2>What the numbers actually say</h2>
+    <p>
+      They're not a highlight reel. Across pattern types, first-target success runs somewhere in the 40s-percent range, second-target success considerably lower — and individual pattern types vary a lot. Crab patterns, in particular, have underperformed badly on the charts I've tested against. That's the honest output of comparing real detected patterns against real subsequent price action, not a cherry-picked backtest. A tool that's clearly better at some patterns than others is a more useful tool than one that implies it's equally good at all of them.
+    </p>
+
+    <h2>Where it stands now</h2>
+    <p>
+      The pattern-type bias, the orphaned drawing cleanup, and the gap between the original six-pattern set and the mentor's eight — all three are resolved, not pending. This wasn't an open-ended project that's still catching bugs as they surface; it was a specific, bounded problem — a rulebook I could see but not run — and the rebuild closes that gap. I still don't have his years of pattern-reading reps. But I have a way to check the math behind every pattern it draws, and that's the part that was actually missing.
+    </p>
+
+    <div class="article-footer-nav">
+      <a href="../index.html#writing" class="article-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to Writing
+      </a>
+      <a href="../index.html#contact" class="project-link">Questions? Let's talk →</a>
+    </div>
+
+  </article>
+
+  <footer id="footer">
+    <div class="footer-inner">
+      <span class="footer-copy">© 2026 Joan Escamilla — built from scratch</span>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/jescamilla1/" target="_blank" rel="noopener" class="btn btn-ghost">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>
+          LinkedIn ↗
+        </a>
+        <a href="https://github.com/jescamilla1/jescamilla1" target="_blank" rel="noopener" class="btn btn-ghost">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.13-.02-2.04-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.18-3.09-.12-.29-.51-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.8 0c2.2-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.77.11 3.06.74.8 1.18 1.83 1.18 3.09 0 4.43-2.69 5.41-5.25 5.7.41.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.2 0 .31.21.66.79.55A11.5 11.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg>
+          GitHub ↗
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../index.js"></script>
+</body>
+</html>

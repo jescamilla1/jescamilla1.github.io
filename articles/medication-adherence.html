@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Owning a Legacy App Across Four Systems — Joan Escamilla</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../index.css" />
+</head>
+<body>
+
+  <nav id="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo" aria-label="Joan Escamilla — home">
+        <span class="nav-logo-text">Joan.Escamilla</span>
+      </a>
+      <div class="nav-links">
+        <a href="../index.html#about" data-section="about">About</a>
+        <a href="../index.html#experience" data-section="experience">Experience</a>
+        <a href="../index.html#projects" data-section="projects">Projects</a>
+        <a href="../index.html#writing" data-section="writing" class="active">Writing</a>
+        <a href="../index.html#contact" data-section="contact">Contact</a>
+        <button id="theme-toggle" aria-label="Toggle theme">light</button>
+      </div>
+      <button id="nav-menu-toggle" class="nav-menu-toggle" aria-label="Open menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="article-header">
+    <div class="container">
+      <a href="../index.html#writing" class="article-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to Writing
+      </a>
+      <p class="t-label">Writeup</p>
+      <h1 class="article-page-title">Owning a legacy app across four systems</h1>
+      <div class="article-meta-row">
+        <span><!-- add date once published --></span>
+        <span>·</span>
+        <span>~8 min read</span>
+      </div>
+    </div>
+  </header>
+
+  <article class="article-content">
+
+    <p>
+      The medication adherence app was my first real project. It wasn't new — it already existed in one system — and my job, paired with another developer who'd started at the company the same week I had, was to retrofit it into a second one. I was new enough that I still wanted to figure everything out myself before asking anyone for help. That instinct didn't last long. Partway through, the other developer left the company, and his half of the work became mine.
+    </p>
+
+    <h2>The same app, a different system, every time</h2>
+    <p>
+      Medication adherence is mostly standalone. It owns its own API, and that API is what every host system actually talks to — the patient portal on whatever system it's being integrated into doesn't get its own version of the logic, it conforms to medication adherence's. So in practice, "retrofit into a new system" mostly meant reworking that API to speak whatever schema the new host expected, and redoing the encryption setup — keys, connection strings, the parts of the script that assume a specific security configuration — for whatever that system required.
+    </p>
+    <p>
+      None of that is exciting work on its own. What made it interesting was what it kept surfacing. Every time the app moved into new soil, something that had been quietly broken in the old one would get noticed. Account reset on the patient portal never actually worked. Live messaging between providers didn't work either. There was a chunk of dead code for what looked like an attempt at a Zoom-style video chat feature — entire blocks of it crossed out, abandoned mid-build, just sitting there in the file. Moving the app wasn't just a migration. It was an audit of everything nobody had gotten around to finishing the first time.
+    </p>
+
+    <h2>Inheriting debt you didn't create</h2>
+    <p>
+      By the second integration, the debt wasn't just historical — some of it was mine. I'd built parts of the first iteration without fully understanding the framework yet, and parts of it were my coworker's, the one who'd left. Clients caught the gaps before I did. I'd get a ticket about something not working, open the module, and realize I was the one who now had to understand code I hadn't written, in a system I'd only recently learned myself, well enough to actually fix it for someone using it.
+    </p>
+    <p>
+      That's the part nobody tells you about being early-career and inheriting a legacy system: it's not that the code is bad, necessarily. It's that you become responsible for context you never had a chance to build firsthand. You're reverse-engineering someone else's decisions from the outside, under a support ticket, instead of from inside the work as it was being made.
+    </p>
+
+    <h2>More room, the third time</h2>
+    <p>
+      The third integration was a different kind of project — folding a legacy application process from an older system into a newer one, tied into medication adherence rather than being medication adherence itself. This time I had real say over how the UI came together, and I was working alongside the lead developer of that system and the original medication adherence SME — someone I'd been learning from since the first iteration. The work was the same shape as before: conform the API, redo the security setup, fix whatever the move exposed. But for the first time, I wasn't just absorbing decisions made before I arrived. I was making some of them.
+    </p>
+
+    <h2>Where it sits now</h2>
+    <p>
+      The current integration — a leaner retrofit into yet another system, with a smaller feature set — isn't mine to build. A senior developer with more bandwidth is doing it faster than I could. But I'm still the one he checks with when something about medication adherence doesn't add up, and I've started sitting in on client meetings as SME backup when the lead developer isn't available. The work changed. What I'm responsible for didn't go away — it just moved from building the thing to being the person who remembers why it's built the way it is.
+    </p>
+    <p>
+      We're still fixing things as they come up, the same as we were in that first integration. The difference isn't the app. It's that I do it faster now, and somewhere in the middle of all four of these, I learned to actually ask questions and say what I was thinking instead of trying to carry all of it myself. That took longer to learn than any of the frameworks did.
+    </p>
+
+    <div class="article-footer-nav">
+      <a href="../index.html#writing" class="article-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to Writing
+      </a>
+      <a href="../index.html#contact" class="project-link">Questions? Let's talk →</a>
+    </div>
+
+  </article>
+
+  <footer id="footer">
+    <div class="footer-inner">
+      <span class="footer-copy">© 2026 Joan Escamilla — built from scratch</span>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/jescamilla1/" target="_blank" rel="noopener" class="btn btn-ghost">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>
+          LinkedIn ↗
+        </a>
+        <a href="https://github.com/jescamilla1/jescamilla1" target="_blank" rel="noopener" class="btn btn-ghost">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.13-.02-2.04-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.18-3.09-.12-.29-.51-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.8 0c2.2-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.77.11 3.06.74.8 1.18 1.83 1.18 3.09 0 4.43-2.69 5.41-5.25 5.7.41.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.2 0 .31.21.66.79.55A11.5 11.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg>
+          GitHub ↗
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../index.js"></script>
+</body>
+</html>
