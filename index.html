@@ -3,6 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <script>
+    (function() {
+      var t = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <meta name="description" content="Joan Escamilla — software engineer building production AI agents for SQL convention enforcement, WCAG compliance auditing, and Pine Script trading tools." />
+
+  <meta property="og:title" content="Joan Escamilla — AI Agent Developer" />
+  <meta property="og:description" content="I build AI agents that close real engineering bottlenecks — not demos." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://YOUR-DOMAIN-HERE" />
+  <meta property="og:image" content="https://YOUR-DOMAIN-HERE/assets/og-image.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Joan Escamilla — AI Agent Developer" />
+  <meta name="twitter:description" content="I build AI agents that close real engineering bottlenecks — not demos." />
+  <meta name="twitter:image" content="https://YOUR-DOMAIN-HERE/assets/og-image.png" />
+
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  
   <title>ElCesina — Developer</title>
 
   <!-- Fonts -->
@@ -49,21 +72,19 @@
           <span class="t-label" style="letter-spacing:0.1em;">Available for opportunities</span>
         </div>
 
-        <h1 class="t-display hero-title">Hi, I'm Joan.</h1>
+        <h1 class="t-display hero-title">I build AI agents.</h1>
         <p class="hero-tagline">I don't trust a fix until I know why it works.</p>
 
         <p class="hero-sub">
-          Full-stack developer, 3+ years in production software. Lately that means building the AI tools that get me to "why" faster — agents that audit code, write SQL, and read charts.
+          Production agents that close real engineering bottlenecks — encoding a team's unwritten SQL conventions, auditing code against WCAG rules. Three years shipping software is what makes them hold up outside a demo.
         </p>
 
         <div class="hero-links">
           <a href="#projects" class="btn btn-primary">See my work</a>
-          <a href="https://github.com/jescamilla1/jescamilla1" target="_blank" rel="noopener" class="btn btn-ghost">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.13-.02-2.04-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.18-3.09-.12-.29-.51-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.8 0c2.2-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.77.11 3.06.74.8 1.18 1.83 1.18 3.09 0 4.43-2.69 5.41-5.25 5.7.41.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.2 0 .31.21.66.79.55A11.5 11.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg>
+          <a href="https://github.com/jescamilla1/jescamilla1" target="_blank" rel="noopener" class="btn btn-ghost" aria-label="GitHub profile — opens in new tab">            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.13-.02-2.04-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.18-3.09-.12-.29-.51-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.8 0c2.2-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.77.11 3.06.74.8 1.18 1.83 1.18 3.09 0 4.43-2.69 5.41-5.25 5.7.41.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.2 0 .31.21.66.79.55A11.5 11.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg>
             GitHub ↗
           </a>
-          <a href="https://www.linkedin.com/in/jescamilla1/" target="_blank" rel="noopener" class="btn btn-ghost">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>
+          <a href="https://www.linkedin.com/in/jescamilla1/" target="_blank" rel="noopener" class="btn btn-ghost" aria-label="LinkedIn profile — opens in new tab">            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>
             LinkedIn ↗
           </a>
         </div>
@@ -91,13 +112,10 @@
       <div class="about-layout">
         <div class="about-body">
           <p>
-            I don't move on anything new until I understand why it works, not just that it does. I like to focus on the techniques, and once I understand how something works
-            , I run with it. In code review I'm the one asking why this approach and not another, even when the fix already works.
+            Most of my team treats AI tools as autocomplete with extra steps. I think they're closer to a junior engineer who needs a spec, a review process, and someone willing to push back — so that's how I build every agent I ship. It's not the popular take internally yet; I'm one of a handful of developers actually pushing the initiative forward while most others wait and see.
           </p>
           <p>
-            That front-loaded curiosity is also why AI ended up central to how I
-            build — not as a shortcut around understanding, but as the fastest
-            way to get an idea into something tangible enough to interrogate.
+            I also mentor a developer I hired through a university capstone program I led — he's a year into the job now, and I still review his work the way I'd want mine reviewed: explain the reasoning, not just hand over the fix.
           </p>
         </div>
       </div>
@@ -125,7 +143,7 @@
             <button class="exp-toggle" aria-expanded="true">
               <div class="exp-toggle-row">
                 <div class="exp-logo" aria-hidden="true">
-                  <img src="./Logos/RDE.png" alt="">
+                  <img src="./Logos/RDE.png" alt="RDE Systems Logo">
                 </div>
                 <div class="exp-toggle-content">
                   <div class="exp-meta">
@@ -144,11 +162,11 @@
             <div class="exp-details">
               <ul class="exp-list">
                 <li>Built and ship data-entry screens, reports, and functional modules; kept the Medication Adherence app stable across multiple framework migrations.</li>
+                <li>Volunteered onto the company's internal AI initiative — most developers remain skeptical, so I've been the one piloting new AI workflows and proposing where else AI could help, beyond my own tickets.</li>
                 <li>Built an agent that encodes the codebase's unwritten SQL conventions — cuts routine script time in half, complex schema-design tasks by a similar margin.</li>
-                <li>Built a second agent that audits code against WCAG rules and proposes phased, human-approved fixes — applied to a 10-file module in ~1 hour vs. a 50+ hour manual baseline.</li>
+                <li>Built a second agent that audits code against WCAG rules and proposes phased, human-approved fixes — senior devs estimated ~50 hours per system for this work; a 10-file/50+-change test sample took ~30 minutes vs. an estimated 3 hours by hand.</li>
                 <li>Part of an inaugural UX/UI initiative tackling 30 years of design debt; proposed an org-wide design documentation standard.</li>
-                <li>Selected and mentored a 5-developer university capstone team, hiring one into a junior role.</li>
-              </ul>
+                <li>Selected and mentored a 5-developer university capstone team, hiring one into a junior role — still mentoring him directly; he just hit one year with the company.</li>              </ul>
               <div class="tag-row">
                 <span class="tag tag-lang">ColdFusion</span>
                 <span class="tag tag-lang">SQL Server</span>
@@ -164,7 +182,7 @@
             <button class="exp-toggle" aria-expanded="false">
               <div class="exp-toggle-row">
                 <div class="exp-logo" aria-hidden="true">
-                  <img src="./Logos/TCS.png" alt="">
+                  <img src="./Logos/TCS.png" alt="The Coder School logo">
                 </div>
                 <div class="exp-toggle-content">
                   <div class="exp-meta">
@@ -197,7 +215,7 @@
             <button class="exp-toggle" aria-expanded="false">
               <div class="exp-toggle-row">
                 <div class="exp-logo" aria-hidden="true">
-                  <img src="./Logos/MetroStar.svg" alt="">
+                  <img src="./Logos/MetroStar.svg" alt="MetroStar Logo">
                 </div>
                 <div class="exp-toggle-content">
                   <div class="exp-meta">
@@ -231,6 +249,51 @@
       </div>
     </div>
   </section>
+
+
+  <section id="credentials" class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="t-label">Credentials</p>
+        <div class="divider"></div>
+        <h2 class="t-headline">Certifications</h2>
+      </div>
+
+      <div class="cred-row">
+
+
+        <div class="cred-card">
+          <div class="cred-icon" aria-hidden="true">
+            <img src="./Logos/Anthropic.jpeg" alt="Anthropic AI Logo">
+          </div>
+          <div class="cred-info">
+            <p class="cred-title">AI Fluency: Framework &amp; Foundations</p>
+            <p class="cred-issuer">Anthropic · Apr 2026</p>
+          </div>
+        </div>
+
+        <div class="cred-card">
+          <div class="cred-icon" aria-hidden="true">
+            <img src="./Logos/Anthropic.jpeg" alt="Anthropic AI Logo">
+          </div>
+          <div class="cred-info">
+            <p class="cred-title">Teaching AI Fluency</p>
+            <p class="cred-issuer">Anthropic · Apr 2026</p>
+          </div>
+        </div>
+
+        <div class="cred-card">
+          <div class="cred-icon" aria-hidden="true">
+            <img src="./Logos/NJIT.svg" alt="Anthropic AI Logo">
+          </div>
+          <div class="cred-info">
+            <p class="cred-title">B.S. Computer Science</p>
+            <p class="cred-issuer">New Jersey Institute of Technology · 2023</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
   <!-- ============================================================
        PROJECTS
   ============================================================ -->
@@ -248,70 +311,67 @@
         <div class="project-card">
           <span class="project-num">01</span>
           <h3 class="project-title">AI-Assisted Trading Indicators</h3>
-          <p class="project-desc">Custom Pine Script indicators built with AI for statistical analysis and trading-zone detection.</p>
+          <p class="project-desc">Built a custom Claude Skill for Pine Script development — it knows the syntax and conventions, flags likely bugs before they ship, and tracks fixes across sessions. Used it to build a suite of indicators, including a harmonic pattern detector and a dynamic support/resistance tool.</p>
           <ul class="project-stats">
-            <li><strong>3,000+</strong> member Discord trading community using it</li>
-            <li>Actively maintained, ongoing development</li>
+            <li><strong>Dynamic Support/Resistance</strong> detects multi-touch pivot zones and draws them live — <strong>3,000+</strong> member Discord community using it</li>
+            <li><strong>Harmonics indicator</strong> rebuilds the underlying pattern-recognition libraries from scratch — prediction zones, historical outcome tracking</li>
           </ul>
           <div class="tag-row">
             <span class="tag tag-lang">Pine Script</span>
             <span class="tag tag-tool">TradingView</span>
-            <span class="tag tag-concept">Prompt Engineering</span>
-            <span class="tag tag-concept">Technical Analysis</span>
+            <span class="tag tag-concept">Claude Skills</span>
+            <span class="tag tag-concept">Harmonic Patterns</span>
           </div>
           <div class="project-footer">
-            <div></div>
-            <a href="#writing" class="project-link">Read writeup →</a>
+            <a href="articles/harmonic-patterns.html" class="project-link">Read writeup →</a>
           </div>
         </div>
 
         <div class="project-card">
           <span class="project-num">02</span>
           <h3 class="project-title">Personal AI Assistant (Local Agent)</h3>
-          <p class="project-desc">A self-hosted AI agent on a local Mac Mini via Ollama, orchestrated through ClawdBot.</p>
+          <p class="project-desc">A fully local AI agent run through OpenClaw on a Mac Mini, reachable from my phone over Discord. Tested several Ollama models to balance hardware limits against answer quality, then built it out to handle email, calendar, and trading-setup questions grounded in Bulkowski's chart-pattern rules.</p>
           <ul class="project-stats">
-            <li>Architected from scratch — <strong>skill modules</strong>, memory management, token optimization</li>
-            <li>Privacy-focused, handles real personal and work workflows</li>
+            <li>Memory runs on <strong>Obsidian's graph links</strong> instead of a vector database — markdown notes become a decision tree the agent navigates for context</li>
+            <li>Full device access meant testing several context-storage approaches before answers were reliable</li>
           </ul>
           <div class="tag-row">
+            <span class="tag tag-tool">OpenClaw</span>
             <span class="tag tag-tool">Ollama</span>
+            <span class="tag tag-tool">Obsidian</span>
             <span class="tag tag-concept">Agentic AI</span>
-            <span class="tag tag-tool">Open Source</span>
             <span class="tag tag-lang">Python</span>
           </div>
           <div class="project-footer">
-            <div></div>
-            <a href="#writing" class="project-link">Read writeup →</a>
+            <a href="articles/local-ai-agent.html" class="project-link">Read writeup →</a>
           </div>
         </div>
 
         <div class="project-card">
           <span class="project-num">03</span>
           <h3 class="project-title">ADA Compliance Agent</h3>
-          <p class="project-desc">Audits code against WCAG rules and proposes fixes — never applies a change without approval.</p>
+          <p class="project-desc">Senior devs estimated ~50 hours per system for screen-reader compliance. Built an agent instead — it reviews code file by file, converts to semantic HTML, adds ARIA labels, and checks JS for screen-reader UX issues like focus handling after a form submits.</p>
           <ul class="project-stats">
-            <li><strong>10 files</strong> remediated in ~1 hour vs. a 50+ hour manual baseline</li>
-            <li>Outputs a feasibility/impact table with phased plan + projected compliance score</li>
-          </ul>
+            <li>Every fix ships with an impact/feasibility score and the specific WCAG rule it satisfies — proposes, never applies, so the developer stays in the loop</li>
+            <li><strong>10 files</strong>, 50+ changes applied: ~30 min with the agent vs. an estimated 3 hours by hand</li>          </ul>
           <div class="tag-row">
             <span class="tag tag-tool">GitHub Copilot</span>
             <span class="tag tag-concept">Agentic AI</span>
-            <span class="tag tag-concept">Accessibility</span>
             <span class="tag tag-concept">WCAG</span>
+            <span class="tag tag-concept">Semantic HTML</span>
           </div>
           <div class="project-footer">
-            <div></div>
-            <a href="#writing" class="project-link">Read writeup →</a>
+            <a href="articles/ada-agent.html" class="project-link">Read writeup →</a>
           </div>
         </div>
 
         <div class="project-card">
           <span class="project-num">04</span>
           <h3 class="project-title">SQL Convention Agent</h3>
-          <p class="project-desc">Encodes a legacy codebase's unwritten SQL conventions so generated scripts follow team standards.</p>
+          <p class="project-desc">Templated the codebase's unwritten SQL conventions — audit logging, naming, history tables with trigger generation on new tables — so a GitHub Copilot agent applies them automatically instead of me piecing them together by hand. Ask it to add a column and it doesn't just write the ALTER statement; it adds the logging and naming conventions that go with it.</p>
           <ul class="project-stats">
             <li>Routine scripts: <strong>~20 min → under 10</strong></li>
-            <li>Complex backfill/FK task: <strong>~40 hrs → ~20 hrs</strong>, via live-schema verification before structural decisions</li>
+            <li><strong>Complex FK backfill</strong> across several tables: 30–40 hr estimate cut to about half — first pass was ~80% there, rest went to testing and verification</li>
           </ul>
           <div class="tag-row">
             <span class="tag tag-tool">GitHub Copilot</span>
@@ -320,8 +380,7 @@
             <span class="tag tag-concept">Prompt Engineering</span>
           </div>
           <div class="project-footer">
-            <div></div>
-            <a href="#writing" class="project-link">Read writeup →</a>
+            <a href="articles/sql-convention-agent.html" class="project-link">Read writeup →</a>
           </div>
         </div>
 
@@ -346,12 +405,30 @@
 
 <!-- ARTICLE ITEM — duplicate to add more -->
         <li>
+          <a href="articles/mentorship.html" class="article-item">
+            <div>
+              <p class="article-title">Learning to ask for help, then learning to be asked   <span class="article-badge-pick">Editor's pick</span></p>
+              <p class="article-teaser">What it actually took for me to stop trying to do everything alone — and what I owe the people who didn't let me.</p>
+                <div class="tag-row">
+                  <span class="tag tag-concept">Mentorship</span>
+                  <span class="tag tag-concept">Leadership</span>
+                </div>
+            </div>
+            <span class="article-date">06/23/2026</span>
+          </a>
+        </li>
+        <li>
           <a href="articles/local-ai-agent.html" class="article-item">
             <div>
-              <p class="article-title">Building a local AI agent from scratch with Ollama and ClawdBot</p>
+              <p class="article-title">Building a local AI agent from scratch with Ollama and OpenClaw</p>
               <p class="article-teaser">Skill modules, memory architecture, and why I stopped relying on the cloud.</p>
+              <div class="tag-row">
+                <span class="tag tag-tool">Ollama</span>
+                <span class="tag tag-tool">OpenClaw</span>
+                <span class="tag tag-concept">Agentic AI</span>
+              </div>
             </div>
-            <span class="article-date">Coming soon</span>
+            <span class="article-date">06/20/2026</span>
           </a>
         </li>
 
@@ -360,8 +437,12 @@
             <div>
               <p class="article-title">Owning a legacy app across four framework migrations</p>
               <p class="article-teaser">What it actually means to be the subject matter expert on software older than you'd like.</p>
+              <div class="tag-row">
+                <span class="tag tag-lang">ColdFusion</span>
+                <span class="tag tag-concept">Legacy Systems</span>
+              </div>
             </div>
-            <span class="article-date">Coming soon</span>
+            <span class="article-date">06/22/2026</span>
           </a>
         </li>
 
@@ -370,8 +451,12 @@
             <div>
               <p class="article-title">How I built a harmonic pattern detector in Pine Script</p>
               <p class="article-teaser">Ratio math, pattern memory, and staying under TradingView's token limit.</p>
+              <div class="tag-row">
+                <span class="tag tag-lang">Pine Script</span>
+                <span class="tag tag-concept">Harmonic Patterns</span>
+              </div>
             </div>
-            <span class="article-date">Coming soon</span>
+            <span class="article-date">06/22/2026</span>
           </a>
         </li>
 
@@ -380,8 +465,12 @@
             <div>
               <p class="article-title">An ADA compliance agent that won't touch code without asking</p>
               <p class="article-teaser">Why the human-approval step is the feature, not a limitation.</p>
+              <div class="tag-row">
+                <span class="tag tag-tool">GitHub Copilot</span>
+                <span class="tag tag-concept">WCAG</span>
+              </div>
             </div>
-            <span class="article-date">Coming soon</span>
+            <span class="article-date">06/20/2026</span>
           </a>
         </li>
 
@@ -390,8 +479,12 @@
             <div>
               <p class="article-title">Teaching an agent your codebase's unwritten SQL rules</p>
               <p class="article-teaser">Convention extraction, schema verification loops, and where the time actually goes.</p>
+              <div class="tag-row">
+                <span class="tag tag-tool">GitHub Copilot</span>
+                <span class="tag tag-lang">SQL Server</span>
+              </div>
             </div>
-            <span class="article-date">Coming soon</span>
+            <span class="article-date">06/20/2026</span>
           </a>
         </li>
 
@@ -400,11 +493,26 @@
             <div>
               <p class="article-title">AI doesn't replace judgment — it changes where you spend it</p>
               <p class="article-teaser">What two agents I built taught me about deciding when AI should act alone.</p>
+              <div class="tag-row">
+                <span class="tag tag-concept">Agentic AI</span>
+                <span class="tag tag-concept">AI Judgment</span>
+              </div>
             </div>
             <span class="article-date">Coming soon</span>
           </a>
         </li>
-
+        <li>
+          <a href="articles/years-of-ai.html" class="article-item">
+            <div>
+              <p class="article-title">A few years of watching AI go from confidently wrong to actually useful</p>
+              <p class="article-teaser">College ChatGPT, a failed vibe-coding attempt, model-switching, and the vibe-coding economy I still go back and forth on.</p>
+              <div class="tag-row">
+                <span class="tag tag-concept">AI Reflection</span>
+              </div>
+            </div>
+            <span class="article-date">06/21/2026</span>
+          </a>
+        </li>
         <!-- ADD MORE ARTICLES HERE -->
 
       </ul>
@@ -414,25 +522,46 @@
   <!-- ============================================================
        CONTACT
   ============================================================ -->
-  <section id="contact" class="section">
+<section id="contact" class="section">
     <div class="container">
       <div class="contact-inner">
         <h2 class="t-headline">Let's talk.</h2>
         <p>Open to full-time roles, contract work, and interesting problems. Reach out directly.</p>
-        <div class="contact-links">
-          <a href="mailto:joan.escamilla1@gmail.com" class="btn btn-primary">
+
+        <form class="contact-form" id="contact-form">
+          <div class="form-row">
+            <label for="contact-reason">What's this about?</label>
+            <select id="contact-reason">
+              <option value="Full-time opportunity">Full-time opportunity</option>
+              <option value="Contract work">Contract work</option>
+              <option value="An interesting problem">An interesting problem</option>
+              <option value="Just want to connect">Just want to connect</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="contact-name">Your name <span class="t-muted">(optional)</span></label>
+            <input type="text" id="contact-name" placeholder="Jane Doe" autocomplete="name">
+          </div>
+          <div class="form-row">
+            <label for="contact-message">A quick note <span class="t-muted">(optional)</span></label>
+            <textarea id="contact-message" placeholder="What's on your mind?"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z" opacity="0"/><path d="M3 6.5 12 13l9-6.5"/><rect x="3" y="5" width="18" height="14" rx="2"/></svg>
-            Send an email
-          </a>
-          <a href="/assets/resume.pdf" target="_blank" rel="noopener" class="btn btn-ghost">
+            Open email →
+          </button>
+        </form>
+
+        <div class="contact-links">
+          <a href="/assets/resume.pdf" target="_blank" rel="noopener" class="btn btn-ghost" aria-label="Resume PDF — opens in new tab">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-4-4m4 4 4-4M5 19h14"/></svg>
             Resume ↓
           </a>
-          <a href="https://www.linkedin.com/in/jescamilla1/" target="_blank" rel="noopener" class="btn btn-ghost">
+          <a href="https://www.linkedin.com/in/jescamilla1/" target="_blank" rel="noopener" class="btn btn-ghost" aria-label="LinkedIn profile — opens in new tab">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>
             LinkedIn ↗
           </a>
-          <a href="https://github.com/jescamilla1/jescamilla1" target="_blank" rel="noopener" class="btn btn-ghost">
+          <a href="https://github.com/jescamilla1/jescamilla1" target="_blank" rel="noopener" class="btn btn-ghost" aria-label="GitHub profile — opens in new tab">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.13-.02-2.04-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.18-3.09-.12-.29-.51-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.8 0c2.2-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.77.11 3.06.74.8 1.18 1.83 1.18 3.09 0 4.43-2.69 5.41-5.25 5.7.41.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.2 0 .31.21.66.79.55A11.5 11.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg>
             GitHub ↗
           </a>
@@ -448,12 +577,10 @@
     <div class="footer-inner">
       <span class="footer-copy">© 2026 Joan Escamilla — built from scratch</span>
       <div class="footer-links">
-        <a href="https://www.linkedin.com/in/jescamilla1/" target="_blank" rel="noopener" class="btn btn-ghost">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>
+        <a href="https://www.linkedin.com/in/jescamilla1/" target="_blank" rel="noopener" class="btn btn-ghost" aria-label="LinkedIn profile — opens in new tab">          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>
           LinkedIn ↗
         </a>
-        <a href="https://github.com/jescamilla1/jescamilla1" target="_blank" rel="noopener" class="btn btn-ghost">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.13-.02-2.04-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.18-3.09-.12-.29-.51-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.8 0c2.2-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.77.11 3.06.74.8 1.18 1.83 1.18 3.09 0 4.43-2.69 5.41-5.25 5.7.41.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.2 0 .31.21.66.79.55A11.5 11.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg>
+        <a href="https://github.com/jescamilla1/jescamilla1" target="_blank" rel="noopener" class="btn btn-ghost" aria-label="GitHub profile — opens in new tab">          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.13-.02-2.04-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.18-3.09-.12-.29-.51-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.8 0c2.2-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.77.11 3.06.74.8 1.18 1.83 1.18 3.09 0 4.43-2.69 5.41-5.25 5.7.41.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.2 0 .31.21.66.79.55A11.5 11.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg>
           GitHub ↗
         </a>
       </div>
