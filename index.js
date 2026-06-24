@@ -6,6 +6,8 @@ const navLinks = document.querySelectorAll('.nav-links a[data-section]');
 const sections = document.querySelectorAll('section[id]');
 
 function updateActiveSection() {
+  if (!sections.length) return;
+
   const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
   let current;
 
@@ -55,6 +57,11 @@ toggle.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : '
 (function initNetwork() {
   const canvas = document.getElementById('topo-canvas');
   if (!canvas) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return; // skip the animated network entirely for reduced-motion users
+  }
+
   const ctx = canvas.getContext('2d');
 
   /* ---- config ---- */
@@ -246,11 +253,6 @@ toggle.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : '
   canvas.addEventListener('click', (e) => {
     const rect = canvas.getBoundingClientRect();
     activateAt(e.clientX - rect.left, e.clientY - rect.top);
-
-    canvas.style.pointerEvents = 'none';
-    const below = document.elementFromPoint(e.clientX, e.clientY);
-    if (below && below !== canvas) below.click();
-    canvas.style.pointerEvents = 'all';
   });
 
   canvas.addEventListener('mousemove', (e) => {
@@ -415,5 +417,29 @@ requestAnimationFrame(() => {
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') setOpen(false);
+  });
+})();
+
+/* ============================================================
+   CONTACT FORM → mailto
+============================================================ */
+(function initContactForm() {
+  const form = document.getElementById('contact-form');
+  if (!form) return;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const reason  = document.getElementById('contact-reason')?.value || 'Reaching out';
+    const name    = document.getElementById('contact-name')?.value.trim() || '';
+    const message = document.getElementById('contact-message')?.value.trim() || '';
+
+    const subject = name ? `${reason} — from ${name}` : reason;
+
+    let body = message ? `${message}\n\n` : '';
+    body += `—\nSent via jescamilla.github.io`; // swap for your real domain
+
+    const mailto = `mailto:joan.escamilla1@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
   });
 })();
