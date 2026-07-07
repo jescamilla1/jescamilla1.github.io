@@ -481,3 +481,40 @@ requestAnimationFrame(() => {
     nextBtn.addEventListener('click', () => goTo(index + 1));
   });
 })();
+
+/* ============================================================
+   PROJECTS ROW — wheel-to-horizontal scroll, edge fades/arrows
+============================================================ */
+(function initProjectsScroller() {
+  const wrap = document.querySelector('.projects-scroll-wrap');
+  const grid = document.querySelector('.projects-grid');
+  if (!wrap || !grid) return;
+
+  const prevBtn = wrap.querySelector('.projects-nav.prev');
+  const nextBtn = wrap.querySelector('.projects-nav.next');
+
+  function cardStep() {
+    const card = grid.querySelector('.project-card');
+    const gap = parseFloat(getComputedStyle(grid).columnGap || '16');
+    return card ? card.getBoundingClientRect().width + gap : 320;
+  }
+
+  function updateEdges() {
+    wrap.classList.toggle('is-at-start', grid.scrollLeft <= 4);
+    wrap.classList.toggle('is-at-end', grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 4);
+  }
+
+  prevBtn?.addEventListener('click', () => grid.scrollBy({ left: -cardStep(), behavior: 'smooth' }));
+  nextBtn?.addEventListener('click', () => grid.scrollBy({ left: cardStep(), behavior: 'smooth' }));
+
+  grid.addEventListener('scroll', updateEdges, { passive: true });
+  window.addEventListener('resize', updateEdges);
+  updateEdges();
+
+  // Map vertical mouse-wheel input to horizontal scroll while over the row
+  grid.addEventListener('wheel', (e) => {
+    if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+    e.preventDefault();
+    grid.scrollBy({ left: e.deltaY });
+  }, { passive: false });
+})();
