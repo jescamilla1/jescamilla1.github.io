@@ -32,6 +32,7 @@
   --nav-height: 56px;
   --max-width:  760px;
   --max-width-wide: 980px;
+  --max-width-projects: 1180px;
 
   --transition: 150ms ease;
 }
@@ -628,10 +629,12 @@ ul { list-style: none; }
 /* ============================================================
    PROJECTS
 ============================================================ */
+#projects .container { max-width: var(--max-width-projects); }
 .projects-grid {
   display: flex;
   gap: var(--space-md);
   overflow-x: auto;
+  overflow-y: hidden;
   scroll-snap-type: x proximity;
   padding-bottom: var(--space-md);
   margin-bottom: calc(var(--space-md) * -1);
@@ -651,8 +654,8 @@ ul { list-style: none; }
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
-  flex: 0 0 360px;
-  width: 360px;
+  flex: 0 0 300px;
+  width: 300px;
   scroll-snap-align: start;
 }
 .project-card:hover {
