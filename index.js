@@ -443,3 +443,41 @@ requestAnimationFrame(() => {
     window.location.href = mailto;
   });
 })();
+
+/* ============================================================
+   PROJECT THUMBNAIL CAROUSELS
+   Drop <img> tags into a .project-thumb-track (replacing its
+   placeholder div) and this wires up dots + arrows automatically.
+   Single image or no images: controls stay hidden, nothing to do.
+============================================================ */
+(function initProjectThumbs() {
+  document.querySelectorAll('.project-thumb').forEach((thumb) => {
+    const track = thumb.querySelector('.project-thumb-track');
+    const dotsWrap = thumb.querySelector('.project-thumb-dots');
+    const prevBtn = thumb.querySelector('.project-thumb-arrow.prev');
+    const nextBtn = thumb.querySelector('.project-thumb-arrow.next');
+    const slides = Array.from(track.querySelectorAll('img'));
+    const count = slides.length;
+    thumb.setAttribute('data-count', String(count));
+    if (count < 2 || !dotsWrap || !prevBtn || !nextBtn) return;
+
+    let index = 0;
+    slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'project-thumb-dot' + (i === 0 ? ' is-active' : '');
+      dot.setAttribute('aria-label', `Go to image ${i + 1}`);
+      dot.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(dot);
+    });
+    const dots = Array.from(dotsWrap.children);
+
+    function goTo(i) {
+      index = (i + count) % count;
+      track.style.transform = `translateX(-${index * 100}%)`;
+      dots.forEach((d, di) => d.classList.toggle('is-active', di === index));
+    }
+    prevBtn.addEventListener('click', () => goTo(index - 1));
+    nextBtn.addEventListener('click', () => goTo(index + 1));
+  });
+})();
