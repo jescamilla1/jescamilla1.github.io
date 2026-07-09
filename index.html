@@ -164,14 +164,17 @@
                 <li>Built and ship data-entry screens, reports, and functional modules; kept the Medication Adherence app stable across multiple framework migrations.</li>
                 <li>Volunteered onto the company's internal AI initiative — most developers remain skeptical, so I've been the one piloting new AI workflows and proposing where else AI could help, beyond my own tickets.</li>
                 <li>Built an agent that encodes the codebase's unwritten SQL conventions — cuts routine script time in half, complex schema-design tasks by a similar margin.</li>
-                <li>Built a second agent that audits code against WCAG rules and proposes phased, human-approved fixes — senior devs estimated ~50 hours per system for this work; a 10-file/50+-change test sample took ~30 minutes vs. an estimated 3 hours by hand.</li>
-                <li>Part of an inaugural UX/UI initiative tackling 30 years of design debt; proposed an org-wide design documentation standard.</li>
+                <li>Built a second agent that audits code against WCAG rules and proposes phased, human-approved fixes, later extended to generate per-file SVN patch files — senior devs estimated ~50 hours per system across 50+ systems needing the work; the agent produced patch files for an entire system in under an hour.</li>
+                <li>Proposed and built the company's first MCP server after the CEO asked whether AI could cut a 50-hour manual PDF-import process — added feasibility-scoring and schema-convention-checking tooling on top, and identified PDF data extraction as the project's real technical ceiling.</li>
+                <li>Leading an inaugural UX/UI initiative to modernize a 30-year-old interface — architected a reusable, scalable CSS system and folded ADA compliance into the same pass; demoed to the team, with a senior dev saying it should ship immediately if not for the contract-approval process.</li>
                 <li>Selected and mentored a 5-developer university capstone team, hiring one into a junior role — still mentoring him directly; he just hit one year with the company.</li>              </ul>
               <div class="tag-row">
                 <span class="tag tag-lang">ColdFusion</span>
                 <span class="tag tag-lang">SQL Server</span>
                 <span class="tag tag-lang">JavaScript</span>
+                <span class="tag tag-lang">CSS</span>
                 <span class="tag tag-tool">GitHub Copilot</span>
+                <span class="tag tag-tool">MCP</span>
                 <span class="tag tag-concept">Agentic AI</span>
                 <span class="tag tag-concept">ADA / WCAG</span>
               </div>
@@ -530,10 +533,11 @@
           </div>
           <span class="project-num">07</span>
           <h3 class="project-title">ADA Compliance Agent</h3>
-          <p class="project-desc">Senior devs estimated ~50 hours per system for screen-reader compliance. Built an agent instead — it reviews code file by file, converts to semantic HTML, adds ARIA labels, and checks JS for screen-reader UX issues like focus handling after a form submits.</p>
+          <p class="project-desc">Senior devs estimated ~50 hours per system for screen-reader compliance, across 50+ systems needing it. Built an agent instead — it reviews code file by file, converts to semantic HTML, adds ARIA labels, checks JS for screen-reader UX issues like focus handling after a form submits, and now generates a per-file SVN patch so a developer can apply the fix directly.</p>
           <ul class="project-stats">
             <li>Every fix ships with an impact/feasibility score and the specific WCAG rule it satisfies — proposes, never applies, so the developer stays in the loop</li>
-            <li><strong>10 files</strong>, 50+ changes applied: ~30 min with the agent vs. an estimated 3 hours by hand</li>          </ul>
+            <li><strong>10 files</strong>, 50+ changes applied: ~30 min with the agent vs. an estimated 3 hours by hand</li>
+            <li>Patch-file pass: an <strong>entire system</strong> reviewed and patched in <strong>under an hour</strong></li>          </ul>
           <div class="tag-row">
             <span class="tag tag-tool">GitHub Copilot</span>
             <span class="tag tag-concept">Agentic AI</span>
@@ -577,6 +581,75 @@
           </div>
           <div class="project-footer">
             <a href="articles/sql-convention-agent.html" class="project-link">Read writeup →</a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-thumb" data-count="0">
+            <div class="project-thumb-track">
+              <!-- Replace this placeholder with <img src="..." alt="..."> tags to populate the carousel -->
+              <div class="project-thumb-placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                <span>Preview coming soon</span>
+              </div>
+            </div>
+            <button class="project-thumb-arrow prev" type="button" aria-label="Previous image">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <button class="project-thumb-arrow next" type="button" aria-label="Next image">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+            <div class="project-thumb-dots"></div>
+          </div>
+          <span class="project-num">09</span>
+          <h3 class="project-title">MCP Server — PDF Import Pipeline</h3>
+          <p class="project-desc">The CEO asked whether AI could cut a 50-hour manual PDF-to-import process. Proposed and built the company's first MCP server, then layered on tooling that scores how much of a given PDF is actually recoverable and cross-checks output against our SQL schema conventions before anyone imports it.</p>
+          <ul class="project-stats">
+            <li>Tested several extraction approaches — text libraries, PDF-to-HTML, PDF-to-Excel, vision-based table detection — none reached clean, production-ready output yet</li>
+            <li>Confirmed with the dev team and outside research that PDF data extraction is a genuinely hard, open problem, not a gap in the approach</li>
+          </ul>
+          <div class="tag-row">
+            <span class="tag tag-tool">MCP</span>
+            <span class="tag tag-lang">Python</span>
+            <span class="tag tag-lang">SQL Server</span>
+            <span class="tag tag-concept">Agentic AI</span>
+          </div>
+          <div class="project-footer">
+            <a href="articles/mcp-server-pdf-import.html" class="project-link">Read writeup →</a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-thumb" data-count="0">
+            <div class="project-thumb-track">
+              <!-- Replace this placeholder with <img src="..." alt="..."> tags to populate the carousel -->
+              <div class="project-thumb-placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                <span>Preview coming soon</span>
+              </div>
+            </div>
+            <button class="project-thumb-arrow prev" type="button" aria-label="Previous image">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <button class="project-thumb-arrow next" type="button" aria-label="Next image">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+            <div class="project-thumb-dots"></div>
+          </div>
+          <span class="project-num">10</span>
+          <h3 class="project-title">EMR UI/UX Overhaul</h3>
+          <p class="project-desc">Our EMR's interface hadn't meaningfully changed in about 30 years, and the company has no dedicated frontend or design team. Used AI to architect a reusable, scalable CSS system and apply it across the product, folding ADA compliance into the same pass instead of treating it as a separate project.</p>
+          <ul class="project-stats">
+            <li>Demoed to the team — senior dev said it should ship immediately if not for the contract-approval process</li>
+            <li>ADA compliance rules folded directly into the rebuild, using the same standards behind the ADA Compliance Agent</li>
+          </ul>
+          <div class="tag-row">
+            <span class="tag tag-lang">CSS</span>
+            <span class="tag tag-concept">UI/UX</span>
+            <span class="tag tag-concept">WCAG</span>
+          </div>
+          <div class="project-footer">
+            <a href="articles/emr-ui-ux-overhaul.html" class="project-link">Read writeup →</a>
           </div>
         </div>
 
@@ -745,7 +818,7 @@
           <a href="articles/emr-ui-ux-overhaul.html" class="article-item">
             <div>
               <p class="article-title">Redesigning our EMR's UI without a frontend team</p>
-              <p class="article-teaser">Twenty years without a UI update, no dedicated frontend team, and what AI closed the gap on.</p>
+              <p class="article-teaser">Thirty years without a UI update, no dedicated frontend team, and what AI closed the gap on.</p>
               <div class="tag-row">
                 <span class="tag tag-lang">CSS</span>
                 <span class="tag tag-concept">UI/UX</span>
