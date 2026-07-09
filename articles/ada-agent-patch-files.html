@@ -43,7 +43,7 @@
       <div class="article-meta-row">
         <span>07/09/2026</span>
         <span>·</span>
-        <span>~3 min read</span>
+        <span>~4 min read</span>
       </div>
     </div>
   </header>
@@ -67,6 +67,12 @@
     <h2>What's next</h2>
     <p>
       I reported the progress back to the senior dev, and the next step is demoing the whole thing — the review, the WCAG citations, the impact/feasibility scoring, and now the patch files themselves — live in the team meeting. That's the actual test of the question the first writeup ended on: how much of this stays something only I run, versus something the rest of the team can pick up. A working patch-file output is the difference between "here's a tool I built" and "here's something you can apply to your own branch."
+    </p>
+    <p>
+      The numbers make the case better than I can. ADA compliance work is estimated at roughly 50 hours per system, and we have more than 50 systems that need it — a manual backlog measured in the thousands of hours. The agent generated patch files for an entire system in under an hour. That gap is the whole argument for why this belongs in a team meeting instead of staying something I quietly run on my own.
+    </p>
+    <p>
+      It's also handed me a second idea I haven't built yet. We have a Bootstrap version migration on the roadmap that's been estimated as a major undertaking in its own right — a different problem, but the same shape: a lot of files that each need a specific, mechanical change applied and verified. If per-file patch generation worked for ADA fixes, there's no obvious reason it wouldn't work there too. That's the next thing worth testing.
     </p>
 
     <div class="article-footer-nav">
