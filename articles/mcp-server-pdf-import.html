@@ -43,7 +43,7 @@
       <div class="article-meta-row">
         <span>07/09/2026</span>
         <span>·</span>
-        <span>~4 min read</span>
+        <span>~5 min read</span>
       </div>
     </div>
   </header>
@@ -64,12 +64,22 @@
       Before I could build anything, MCP access needed to be turned on — it had been disabled company-wide over cost concerns, and that wasn't a switch I could flip myself. I made the case to IT anyway, in the limited terms I actually understood at that point: that in theory, a scoped MCP server could do exactly what the CEO had described, and that the cost concern was something to configure around, not a reason to keep it off entirely. I wasn't the expert in the room. I was just the one who'd already said yes.
     </p>
 
-    <h2>It worked</h2>
+    <h2>The server, then the real work</h2>
     <p>
-      Once access came through, I asked AI to build the server itself — a working MCP server in Python, plus a README documenting how it worked, since I already knew I wouldn't be the only one who'd eventually need to understand it. I tested it against the actual problem: take a client's PDF files, transform them into an import-ready spreadsheet. It worked.
+      Once access came through, I asked AI to build the server itself — a working MCP server in Python, plus a README documenting how it worked, since I already knew I wouldn't be the only one who'd eventually need to understand it. Getting the server running was the easy part. The real work was the tools I built on top of it: one that reviews an import file and scores how feasible it is to extract — how much of the data is actually recoverable, what's likely to get skipped, essentially a quality rating before anyone commits to using it. Another cross-checks the output against our SQL database's existing conventions, so what comes out the other end already matches our schema instead of needing manual cleanup afterward.
+    </p>
+
+    <h2>Chasing better extraction</h2>
+    <p>
+      Getting good data out of the PDFs turned out to be the actual problem. I tested several approaches: straight text extraction with various Python libraries, PDF-to-semantic-HTML, PDF-to-Excel, and vision-based methods that screenshot the regions a model thinks are tables and read the data off the image instead of the raw text layer. Testing that many approaches, that quickly, isn't something I could have done without AI directing and building each variant — this was testing practice I designed, with AI doing the delivery. Each method got incrementally better, but never clean. Formatting kept coming out wrong, and pieces of data kept going missing no matter which method produced the fewest errors elsewhere.
+    </p>
+
+    <h2>It's not just me who thinks this is hard</h2>
+    <p>
+      After work one night, I went looking for how other people had solved this. What I found on Reddit and a few dev forums was more or less a consensus: PDF data extraction is a genuinely hard problem, and plenty of people who'd tried it concluded it wasn't worth solving generally. I brought it up at our next dev meeting, half expecting someone to have a trick I'd missed. Instead, the team had run into the same wall before and told me the same thing the forums had — push back on the ask.
     </p>
     <p>
-      This isn't the first time a project has pulled me in this direction — the <a href="ada-agent.html">ADA compliance agent</a> started the same way, a shortcut I built for myself that turned into something worth doing properly once a senior dev put a number on the hours it was saving. Between that and this, I've stopped being surprised when I'm the one who ends up owning the AI work. I just wish I'd had the MCP documentation open before I said yes to building one.
+      I haven't pushed back yet. What I have is a working server, two tools that make any import measurably safer to trust, and a clear-eyed read on where the actual ceiling is instead of a guess. This project is turning into something bigger than the PDF import problem it started as — it's the proof of concept for what AI infrastructure looks like at this company, and I'm the one who has to deliver it. That's the same shape as the <a href="ada-agent.html">ADA agent</a> and the <a href="emr-ui-ux-overhaul.html">UI rebuild</a> before it: a gap nobody else is positioned to close yet, so I'm closing it.
     </p>
 
     <div class="article-footer-nav">
