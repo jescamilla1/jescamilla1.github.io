@@ -2,7 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://jescamilla1.github.io/</loc>
-    <lastmod>2026-07-09</lastmod>
+    <lastmod>2026-07-11</lastmod>
+  </url>
+  <url>
+    <loc>https://jescamilla1.github.io/articles/ada-agent-full-scan.html</loc>
+    <lastmod>2026-07-11</lastmod>
+  </url>
+  <url>
+    <loc>https://jescamilla1.github.io/articles/ui-ux-internal-rollout.html</loc>
+    <lastmod>2026-07-11</lastmod>
   </url>
   <url>
     <loc>https://jescamilla1.github.io/articles/mcp-server-pdf-import.html</loc>
@@ -10,11 +18,11 @@
   </url>
   <url>
     <loc>https://jescamilla1.github.io/articles/emr-ui-ux-overhaul.html</loc>
-    <lastmod>2026-07-09</lastmod>
+    <lastmod>2026-07-11</lastmod>
   </url>
   <url>
     <loc>https://jescamilla1.github.io/articles/ada-agent-patch-files.html</loc>
-    <lastmod>2026-07-09</lastmod>
+    <lastmod>2026-07-11</lastmod>
   </url>
   <url>
     <loc>https://jescamilla1.github.io/articles/vibe-coding-claude-limits.html</loc>

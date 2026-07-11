@@ -164,9 +164,9 @@
                 <li>Built and ship data-entry screens, reports, and functional modules; kept the Medication Adherence app stable across multiple framework migrations.</li>
                 <li>Volunteered onto the company's internal AI initiative — most developers remain skeptical, so I've been the one piloting new AI workflows and proposing where else AI could help, beyond my own tickets.</li>
                 <li>Built an agent that encodes the codebase's unwritten SQL conventions — cuts routine script time in half, complex schema-design tasks by a similar margin.</li>
-                <li>Built a second agent that audits code against WCAG rules and proposes phased, human-approved fixes, later extended to generate per-file SVN patch files — senior devs estimated ~50 hours per system across 50+ systems needing the work; the agent produced patch files for an entire system in under an hour.</li>
+                <li>Built a second agent that audits code against WCAG rules and proposes phased, human-approved fixes, extended to generate per-file SVN patch files, then rebuilt to scan an entire codebase on its own — cutting the standard ~60-hour-per-system estimate to about 5 hours including diff review, across 50+ systems needing the work.</li>
                 <li>Proposed and built the company's first MCP server after the CEO asked whether AI could cut a 50-hour manual PDF-import process — added feasibility-scoring and schema-convention-checking tooling on top, and identified PDF data extraction as the project's real technical ceiling.</li>
-                <li>Leading an inaugural UX/UI initiative to modernize a 30-year-old interface — architected a reusable, scalable CSS system and folded ADA compliance into the same pass; demoed to the team, with a senior dev saying it should ship immediately if not for the contract-approval process.</li>
+                <li>Leading an inaugural UX/UI initiative to modernize a 30-year-old interface — architected a reusable, scalable CSS system with tokenized colors and folded ADA compliance into the same pass; after a senior dev demo, rebuilt the internal site's entire frontend from 20-year-old default Bootstrap styling to a modern, modular system in 3 days.</li>
                 <li>Selected and mentored a 5-developer university capstone team, hiring one into a junior role — still mentoring him directly; he just hit one year with the company.</li>              </ul>
               <div class="tag-row">
                 <span class="tag tag-lang">ColdFusion</span>
@@ -529,11 +529,11 @@
           </div>
           <span class="project-num">07</span>
           <h3 class="project-title">ADA Compliance Agent</h3>
-          <p class="project-desc">Senior devs estimated ~50 hours per system for screen-reader compliance, across 50+ systems needing it. Built an agent instead — it reviews code file by file, converts to semantic HTML, adds ARIA labels, checks JS for screen-reader UX issues like focus handling after a form submits, and now generates a per-file SVN patch so a developer can apply the fix directly.</p>
+          <p class="project-desc">Senior devs estimated ~60 hours per system for screen-reader compliance, across 50+ systems needing it. Built an agent instead — it now scans an entire codebase on its own, converts to semantic HTML, adds ARIA labels, checks JS for screen-reader UX issues like focus handling after a form submits, and generates a per-file SVN patch so a developer can apply the fix directly.</p>
           <ul class="project-stats">
             <li>Every fix ships with an impact/feasibility score and the specific WCAG rule it satisfies — proposes, never applies, so the developer stays in the loop</li>
             <li><strong>10 files</strong>, 50+ changes applied: ~30 min with the agent vs. an estimated 3 hours by hand</li>
-            <li>Patch-file pass: an <strong>entire system</strong> reviewed and patched in <strong>under an hour</strong></li>          </ul>
+            <li>Full-codebase scan: <strong>~60-hour</strong> manual estimate cut to <strong>about 5 hours</strong> per system, patch creation and diff review included</li>          </ul>
           <div class="tag-row">
             <span class="tag tag-tool">GitHub Copilot</span>
             <span class="tag tag-concept">Agentic AI</span>
@@ -622,10 +622,11 @@
           </div>
           <span class="project-num">10</span>
           <h3 class="project-title">EMR UI/UX Overhaul</h3>
-          <p class="project-desc">Our EMR's interface hadn't meaningfully changed in about 30 years, and the company has no dedicated frontend or design team. Used AI to architect a reusable, scalable CSS system and apply it across the product, folding ADA compliance into the same pass instead of treating it as a separate project.</p>
+          <p class="project-desc">Our EMR's interface hadn't meaningfully changed in about 30 years, and the company has no dedicated frontend or design team. Used AI to architect a reusable, scalable CSS system with tokenized colors and apply it across the product, folding ADA compliance into the same pass instead of treating it as a separate project.</p>
           <ul class="project-stats">
             <li>Demoed to the team — senior dev said it should ship immediately if not for the contract-approval process</li>
             <li>ADA compliance rules folded directly into the rebuild, using the same standards behind the ADA Compliance Agent</li>
+            <li>A second senior dev asked for the same UI/UX on our internal site — rebuilt that frontend from 20-year-old default Bootstrap styling to a modern, modular system in <strong>3 days</strong></li>
           </ul>
           <div class="tag-row">
             <span class="tag tag-lang">CSS</span>
@@ -810,6 +811,34 @@
               </div>
             </div>
             <span class="article-date">07/09/2026</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="articles/ada-agent-full-scan.html" class="article-item">
+            <div>
+              <p class="article-title">Letting the ADA agent scan an entire codebase on its own</p>
+              <p class="article-teaser">The manual per-file loop was the actual bottleneck — automating the scan itself cut the estimate from 60 hours a system to about 5.</p>
+              <div class="tag-row">
+                <span class="tag tag-tool">GitHub Copilot</span>
+                <span class="tag tag-concept">WCAG</span>
+              </div>
+            </div>
+            <span class="article-date">07/11/2026</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="articles/ui-ux-internal-rollout.html" class="article-item">
+            <div>
+              <p class="article-title">Rebuilding the internal site's frontend in three days</p>
+              <p class="article-teaser">A second senior dev loved the demo enough to ask for it on the real site — reusable CSS classes, color tokenization, and an entire frontend rebuilt in three days.</p>
+              <div class="tag-row">
+                <span class="tag tag-lang">CSS</span>
+                <span class="tag tag-concept">UI/UX</span>
+              </div>
+            </div>
+            <span class="article-date">07/11/2026</span>
           </a>
         </li>
         <!-- ADD MORE ARTICLES HERE -->
