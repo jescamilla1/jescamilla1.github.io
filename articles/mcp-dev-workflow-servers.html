@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Questions about the database and the codebase that used to mean opening SSMS or digging through SVN — now answered in seconds, and not something agents alone could ever pull off." />
+
+  <meta property="og:title" content="Two MCP Servers I Built for My Own Dev Workflow — Joan Escamilla" />
+  <meta property="og:description" content="Questions about the database and the codebase that used to mean opening SSMS or digging through SVN — now answered in seconds, and not something agents alone could ever pull off." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jescamilla1.github.io/articles/mcp-dev-workflow-servers.html" />
+  <meta property="og:image" content="https://jescamilla1.github.io/Logos/Banner.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Two MCP Servers I Built for My Own Dev Workflow — Joan Escamilla" />
+  <meta name="twitter:description" content="Questions about the database and the codebase that used to mean opening SSMS or digging through SVN — now answered in seconds, and not something agents alone could ever pull off." />
+  <meta name="twitter:image" content="https://jescamilla1.github.io/Logos/Banner.jpg" />
+
+  <link rel="icon" type="image/png" href="/favicon.png" />
+
+  <title>Two MCP Servers I Built for My Own Dev Workflow — Joan Escamilla</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../index.css" />
+</head>
+<body>
+
+  <nav id="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo" aria-label="Joan Escamilla — home">
+        <span class="nav-logo-text">Joan.Escamilla</span>
+      </a>
+      <div class="nav-links">
+        <a href="../index.html#about" data-section="about">About</a>
+        <a href="../index.html#experience" data-section="experience">Experience</a>
+        <a href="../index.html#projects" data-section="projects">Projects</a>
+        <a href="../index.html#writing" data-section="writing" class="active">Writing</a>
+        <a href="../index.html#contact" data-section="contact">Contact</a>
+        <button id="theme-toggle" aria-label="Toggle theme">light</button>
+      </div>
+      <button id="nav-menu-toggle" class="nav-menu-toggle" aria-label="Open menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="article-header">
+    <div class="container">
+      <a href="../index.html#writing" class="article-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to Writing
+      </a>
+      <p class="t-label">Writeup</p>
+      <h1 class="article-page-title">Two MCP servers I built for my own dev workflow</h1>
+      <div class="article-meta-row">
+        <span>07/11/2026</span>
+        <span>·</span>
+        <span>~4 min read</span>
+      </div>
+    </div>
+  </header>
+
+  <article class="article-content">
+
+    <p>
+      The <a href="mcp-server-pdf-import.html">MCP server work</a> started with a CEO ask about automating a manual client-import process, and I kept testing extraction approaches after that — PDF to Word to HTML to Markdown, screenshotting sections and converting those into Excel, all chasing the same goal of getting more usable data out reliably. But somewhere in that process, the idea of an MCP server stopped being about PDF import specifically. It turned into something bigger: a way to give AI tools access to things a plain agent can't reach.
+    </p>
+
+    <h2>A tool for asking questions about our database</h2>
+    <p>
+      The first one I built lets me ask questions about our database directly — the tables, how they relate to each other, whether a table is missing the history table and trigger scripts our conventions require, whether a column is missing somewhere it shouldn't be. I no longer open SSMS for the small questions; I just ask. This wasn't something a regular agent could do well — that kind of context is token-intensive and runs into context limits fast. MCP sidesteps that by giving the agent tools that query the database directly and build a schema graph of the relationships, instead of trying to hold the whole schema in context at once. There's an obvious next step I haven't built yet: wiring this into the <a href="sql-convention-agent.html">SQL convention agent</a> so it doesn't just flag what's missing, it fixes it.
+    </p>
+
+    <h2>A tool for asking questions about the codebase</h2>
+    <p>
+      The second one uses SVN to answer questions about the codebase itself. If I get a support ticket, I can ask who last edited the affected file, how recent that commit was, and whether it's actually related to the ticket. I can ask it to review the quality of recent commits and flag ones that might have introduced a bug. I can hand it my currently edited files and have it group them into logical commits with messages that actually describe what changed, instead of doing that sorting myself.
+    </p>
+
+    <h2>What this actually proved</h2>
+    <p>
+      I was genuinely surprised by how much of this I'd been missing. AI infrastructure for coding — not just AI writing code, but AI with real access to the systems around the code — turned out to be exactly as real as it sounded. When I demo this, there won't be much room left to doubt what it can actually do.
+    </p>
+
+    <h2>What's next</h2>
+    <p>
+      Two more ideas are already forming: a Playwright-based server that could test our sites for accessibility the same way the <a href="ada-agent.html">ADA agent</a> already does for code, and one aimed at the <a href="ada-agent-patch-files.html">Bootstrap 3-to-5 migration</a> idea I floated earlier. I think this can cut those estimates just as drastically as it has here. The next step isn't more building — it's demoing what's already working and letting the results make the argument themselves.
+    </p>
+
+    <div class="article-footer-nav">
+      <a href="../index.html#writing" class="article-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to Writing
+      </a>
+      <a href="../index.html#contact" class="project-link">Questions? Let's talk →</a>
+    </div>
+
+  </article>
+
+  <footer id="footer">
+    <div class="footer-inner">
+      <span class="footer-copy">© 2026 Joan Escamilla — built from scratch</span>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/jescamilla1/" target="_blank" rel="noopener" class="btn btn-ghost">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>
+          LinkedIn ↗
+        </a>
+        <a href="https://github.com/jescamilla1/jescamilla1" target="_blank" rel="noopener" class="btn btn-ghost">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.13-.02-2.04-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.18-3.09-.12-.29-.51-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.8 0c2.2-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.77.11 3.06.74.8 1.18 1.83 1.18 3.09 0 4.43-2.69 5.41-5.25 5.7.41.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.2 0 .31.21.66.79.55A11.5 11.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg>
+          GitHub ↗
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../index.js"></script>
+</body>
+</html>
