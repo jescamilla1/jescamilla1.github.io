@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="A CEO's idea, a 50-hour manual process, and a tool I pitched before I'd built one — plus a problem harder than anyone expected." />
+  <meta name="description" content="A CEO's idea, a 40-to-50-hour manual process, and a tool I pitched before I'd built one — plus a problem harder than anyone expected." />
 
   <meta property="og:title" content="How I Ended Up Building the Company's First MCP Server — Joan Escamilla" />
-  <meta property="og:description" content="A CEO's idea, a 50-hour manual process, and a tool I pitched before I'd built one — plus a problem harder than anyone expected." />
+  <meta property="og:description" content="A CEO's idea, a 40-to-50-hour manual process, and a tool I pitched before I'd built one — plus a problem harder than anyone expected." />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://jescamilla1.github.io/articles/mcp-server-pdf-import.html" />
   <meta property="og:image" content="https://jescamilla1.github.io/Logos/Banner.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="How I Ended Up Building the Company's First MCP Server — Joan Escamilla" />
-  <meta name="twitter:description" content="A CEO's idea, a 50-hour manual process, and a tool I pitched before I'd built one — plus a problem harder than anyone expected." />
+  <meta name="twitter:description" content="A CEO's idea, a 40-to-50-hour manual process, and a tool I pitched before I'd built one — plus a problem harder than anyone expected." />
   <meta name="twitter:image" content="https://jescamilla1.github.io/Logos/Banner.jpg" />
 
   <link rel="icon" type="image/png" href="/favicon.png" />
@@ -66,7 +66,7 @@
   <article class="article-content">
 
     <p>
-      Our CEO — who also holds the CVO title, chief vision officer, and has been the one pushing AI research at the company in the first place — brought a problem to a meeting. A client hands us a batch of PDF files, and getting that data into our system takes someone around 50 hours of manual extraction and reformatting, every time. He wanted to know why AI couldn't just do it: take the PDFs, transform them into something our system could import, and call it a day. That was roughly the whole vision.
+      Our CEO — who also holds the CVO title, chief vision officer, and has been the one pushing AI research at the company in the first place — brought a problem to a meeting. A client's fiscal managers hand us a batch of budget-update PDFs, and getting that data into our system takes them 40 to 50 hours of manual extraction and reformatting, every time. He wanted to know why AI couldn't just do it: take the PDFs, transform them into something our system could import, and call it a day. That was roughly the whole vision.
     </p>
 
     <h2>Suffering from success</h2>
@@ -95,6 +95,9 @@
     </p>
     <p>
       I haven't pushed back yet. What I have is a working server, two tools that make any import measurably safer to trust, and a clear-eyed read on where the actual ceiling is instead of a guess. This project is turning into something bigger than the PDF import problem it started as — it's the proof of concept for what AI infrastructure looks like at this company, and I'm the one who has to deliver it. That's the same shape as the <a href="ada-agent.html">ADA agent</a> and the <a href="emr-ui-ux-overhaul.html">UI rebuild</a> before it: a gap nobody else is positioned to close yet, so I'm closing it.
+    </p>
+    <p>
+      The real reason I still haven't pushed back: I found the actual fix. Running a PDF directly through an LLM instead of a coded extraction pipeline sidesteps the ceiling entirely — no parsing library, no vision-model workaround, just the model reading the document the way a person would. The only thing missing is an LLM API endpoint of our own to run it against, which turned out to be exactly what the AWS AgentCore conversation was about.
     </p>
     <p>
       Update: that proof-of-concept framing turned out to be right — see <a href="mcp-dev-workflow-servers.html">the follow-up</a> on the two MCP servers I built next, for my own dev workflow.

@@ -164,11 +164,11 @@
                 <li>Built and ship data-entry screens, reports, and functional modules; kept the Medication Adherence app stable across multiple framework migrations.</li>
                 <li>Volunteered onto the company's internal AI initiative — most developers remain skeptical, so I've been the one piloting new AI workflows and proposing where else AI could help, beyond my own tickets.</li>
                 <li>Built an agent that encodes the codebase's unwritten SQL conventions — cuts routine script time in half, complex schema-design tasks by a similar margin.</li>
-                <li>Built a second agent that audits code against WCAG rules and proposes phased, human-approved fixes, extended to generate per-file SVN patch files, then rebuilt to scan an entire codebase on its own — cutting the standard ~60-hour-per-system estimate to about 5 hours including diff review, across 50+ systems needing the work.</li>
-                <li>Proposed and built the company's first MCP server after the CEO asked whether AI could cut a manual client-import process, then built two more for internal dev workflows — one that answers schema and convention questions directly against our database, and one that uses SVN to answer codebase and commit questions and group edits into commits, cutting a class of manual SSMS/SVN lookups to seconds.</li>
+                <li>Built a second agent that audits code against WCAG rules and proposes phased, human-approved fixes, extended to generate per-file SVN patch files, then rebuilt to scan an entire codebase on its own — projected to cut the 50-to-60-hour-per-system estimate to about 5 hours including diff review, across 50+ systems needing the work; full-system validation is still pending.</li>
+                <li>Proposed and built the company's first MCP server after the CEO asked whether AI could cut a 40-to-50-hour manual client-import process, then built two more for internal dev workflows — one that answers schema and convention questions directly against our database, and one that uses SVN to answer codebase and commit questions and group edits into commits, cutting a class of manual SSMS/SVN lookups to seconds.</li>
                 <li>Led a technical meeting with AWS engineers on scaling our MCP infrastructure via AgentCore, Bedrock, and Lambda — researched and presented the architecture and identified AgentCore as the fix for our missing LLM API endpoint within our existing AWS budget; later demoed the servers directly to a senior dev, who called it a step toward proper system documentation.</li>
                 <li>Leading an inaugural UX/UI initiative to modernize a 30-year-old interface — architected a reusable, scalable CSS system with tokenized colors and folded ADA compliance into the same pass; after a senior dev demo, rebuilt the internal site's entire frontend from 20-year-old default Bootstrap styling to a modern, modular system in 3 days.</li>
-                <li>Now leading a new design system initiative — a bigger scope than anything I've solo-led before, with authority to assign pieces to junior developers as needed — stripping our most modern product into documented, reusable components for the team.</li>
+                <li>Now leading a new design system initiative born out of downtime while the EMR product awaits contract approval — leading 2 junior developers with a 2-week demo timeline — stripping our most modern product into documented, reusable components and practices for the team.</li>
                 <li>Selected and mentored a 5-developer university capstone team, hiring one into a junior role — still mentoring him directly; he just hit one year with the company.</li>              </ul>
               <div class="tag-row">
                 <span class="tag tag-lang">ColdFusion</span>
@@ -544,11 +544,13 @@
           </div>
           <span class="project-num">07</span>
           <h3 class="project-title">ADA Compliance Agent</h3>
-          <p class="project-desc">Senior devs estimated ~60 hours per system for screen-reader compliance, across 50+ systems needing it. Built an agent instead — it now scans an entire codebase on its own, converts to semantic HTML, adds ARIA labels, checks JS for screen-reader UX issues like focus handling after a form submits, and generates a per-file SVN patch so a developer can apply the fix directly.</p>
+          <p class="project-desc">Senior devs estimated 50 to 60 hours per system for screen-reader compliance, across 50+ systems needing it. Built an agent instead — it now scans an entire codebase on its own, converts to semantic HTML, adds ARIA labels, checks JS for screen-reader UX issues like focus handling after a form submits, and generates a per-file SVN patch so a developer can apply the fix directly.</p>
           <ul class="project-stats">
             <li>Every fix ships with an impact/feasibility score and the specific WCAG rule it satisfies — proposes, never applies, so the developer stays in the loop</li>
             <li><strong>10 files</strong>, 50+ changes applied: ~30 min with the agent vs. an estimated 3 hours by hand</li>
-            <li>Full-codebase scan: <strong>~60-hour</strong> manual estimate cut to <strong>about 5 hours</strong> per system, patch creation and diff review included</li>          </ul>
+            <li>Full-codebase scan: <strong>50–60 hour</strong> manual estimate projected to drop to <strong>about 5 hours</strong> per system — full-system validation still pending, blocked on token limits</li>
+            <li>Validation plan: benchmark against an existing ADA compliance tool before and after the agent runs, to measure the improvement directly</li>
+          </ul>
           <div class="tag-row">
             <span class="tag tag-tool">GitHub Copilot</span>
             <span class="tag tag-concept">Agentic AI</span>
@@ -606,10 +608,10 @@
           </div>
           <span class="project-num">09</span>
           <h3 class="project-title">MCP Server Infrastructure</h3>
-          <p class="project-desc">The CEO asked whether AI could cut a manual client-import process. Proposed and built the company's first MCP server, then expanded into dev-workflow tools — one that answers schema and convention questions directly against our database, and one that uses SVN to answer codebase and commit questions.</p>
+          <p class="project-desc">The CEO asked whether AI could cut a 40-to-50-hour manual client-import process handled by fiscal managers. Proposed and built the company's first MCP server, then expanded into dev-workflow tools — one that answers schema and convention questions directly against our database, and one that uses SVN to answer codebase and commit questions.</p>
           <ul class="project-stats">
             <li>Tested several PDF extraction approaches — text libraries, PDF-to-HTML, PDF-to-Excel, vision-based table detection — none reached clean, production-ready output yet</li>
-            <li>Confirmed with the dev team and outside research that PDF data extraction is a genuinely hard, open problem, not a gap in the approach</li>
+            <li>The actual fix: running a PDF directly through an LLM instead of a coded pipeline sidesteps the extraction ceiling entirely — just needs an LLM API endpoint to run against</li>
             <li>DB and codebase MCP servers replaced routine SSMS/SVN lookups — schema relationships, missing convention scripts, and commit history all answered directly, no agent context limits</li>
             <li>Led a technical meeting with AWS engineers on hosting these servers via <strong>AgentCore, Bedrock, and Lambda</strong> — solves the missing LLM API endpoint and moves them from my laptop to something the whole team can use</li>
             <li>Demoed to a senior dev in our internal AI meeting — called it a step in the right direction for proper system documentation</li>
@@ -647,7 +649,7 @@
             <li>Demoed to the team — senior dev said it should ship immediately if not for the contract-approval process</li>
             <li>ADA compliance rules folded directly into the rebuild, using the same standards behind the ADA Compliance Agent</li>
             <li>A second senior dev asked for the same UI/UX on our internal site — rebuilt that frontend from 20-year-old default Bootstrap styling to a modern, modular system in <strong>3 days</strong></li>
-            <li>Now leading a design system initiative — a bigger scope than anything I've solo-led before, with authority to assign pieces to junior developers as needed</li>
+            <li>Now leading a design system initiative born out of downtime while the EMR product awaits contract approval — leading <strong>2 junior developers</strong>, demo in <strong>2 weeks</strong></li>
           </ul>
           <div class="tag-row">
             <span class="tag tag-lang">CSS</span>
@@ -810,7 +812,7 @@
           <a href="articles/mcp-server-pdf-import.html" class="article-item">
             <div>
               <p class="article-title">How I ended up building the company's first MCP server</p>
-              <p class="article-teaser">A CEO's idea, a 50-hour manual process, and a tool I pitched before I'd built one — plus a problem harder than anyone expected.</p>
+              <p class="article-teaser">A CEO's idea, a 40-to-50-hour manual process, and a tool I pitched before I'd built one — plus a problem harder than anyone expected.</p>
               <div class="tag-row">
                 <span class="tag tag-tool">MCP</span>
                 <span class="tag tag-lang">Python</span>
@@ -840,7 +842,7 @@
           <a href="articles/ada-agent-full-scan.html" class="article-item">
             <div>
               <p class="article-title">Letting the ADA agent scan an entire codebase on its own</p>
-              <p class="article-teaser">The manual per-file loop was the actual bottleneck — automating the scan itself cut the estimate from 60 hours a system to about 5.</p>
+              <p class="article-teaser">The manual per-file loop was the actual bottleneck — automating the scan is projected to cut the estimate from 60 hours a system to about 5, pending a full-system test.</p>
               <div class="tag-row">
                 <span class="tag tag-tool">GitHub Copilot</span>
                 <span class="tag tag-concept">WCAG</span>

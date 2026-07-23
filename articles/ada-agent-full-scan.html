@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="The manual per-file loop was the actual bottleneck — automating the scan itself cut the estimate from 60 hours a system to about 5." />
+  <meta name="description" content="The manual per-file loop was the actual bottleneck — automating the scan is projected to cut the estimate from 60 hours a system to about 5, pending a full-system test." />
 
   <meta property="og:title" content="Letting the ADA Agent Scan an Entire Codebase on Its Own — Joan Escamilla" />
-  <meta property="og:description" content="The manual per-file loop was the actual bottleneck — automating the scan itself cut the estimate from 60 hours a system to about 5." />
+  <meta property="og:description" content="The manual per-file loop was the actual bottleneck — automating the scan is projected to cut the estimate from 60 hours a system to about 5, pending a full-system test." />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://jescamilla1.github.io/articles/ada-agent-full-scan.html" />
   <meta property="og:image" content="https://jescamilla1.github.io/Logos/Banner.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Letting the ADA Agent Scan an Entire Codebase on Its Own — Joan Escamilla" />
-  <meta name="twitter:description" content="The manual per-file loop was the actual bottleneck — automating the scan itself cut the estimate from 60 hours a system to about 5." />
+  <meta name="twitter:description" content="The manual per-file loop was the actual bottleneck — automating the scan is projected to cut the estimate from 60 hours a system to about 5, pending a full-system test." />
   <meta name="twitter:image" content="https://jescamilla1.github.io/Logos/Banner.jpg" />
 
   <link rel="icon" type="image/png" href="/favicon.png" />
@@ -74,14 +74,19 @@
       I rebuilt the workflow so the agent scans an entire codebase on its own — checking every file against the same screen-reader-accessibility rules it already knew, and generating a patch file with a diff for each one that actually needed a change. I stopped being the thing standing between one file and the next.
     </p>
 
-    <h2>The new numbers</h2>
+    <h2>The projected numbers</h2>
     <p>
-      The standard estimate for this work by hand is around 60 hours a system. With the agent scanning the whole codebase and generating patch files on its own, that's down to about 5 hours a system — and that number includes reviewing the diffs, not just generating them.
+      The standard estimate for this work by hand is 50 to 60 hours a system. Scanning the whole codebase and generating patch files on its own is projected to bring that down to about 5 hours a system, including reviewing the diffs — but that's still an estimate, not a measured result. We haven't run the full-scan version against an entire system yet; I hit token limits again, the same problem that slowed down the original version of this agent.
+    </p>
+
+    <h2>How we're planning to actually prove it</h2>
+    <p>
+      In a dev meeting, we talked through how to validate the improvement instead of just taking my word for it: run an existing ADA compliance tool against a system to get a baseline score, run the agent, then run the same tool again and measure the difference. That benchmark is the plan for the first real full-system test, once the token problem is solved.
     </p>
 
     <h2>What's still manual</h2>
     <p>
-      The review step didn't go away, and I don't want it to. Every diff still gets read before it's applied — the same human-approval principle the <a href="ada-agent.html">first version</a> was built around. What changed is how much of the 60 hours was actually spent waiting on me to point the agent at the next file, instead of on the part that actually needs a person: deciding whether the fix is right.
+      The review step didn't go away, and I don't want it to. Every diff still gets read before it's applied — the same human-approval principle the <a href="ada-agent.html">first version</a> was built around. What changes with a full scan is how much of the 50-to-60-hour estimate was spent waiting on me to point the agent at the next file, instead of on the part that actually needs a person: deciding whether the fix is right.
     </p>
 
     <div class="article-footer-nav">

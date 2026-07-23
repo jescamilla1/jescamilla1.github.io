@@ -58,7 +58,7 @@
       <div class="article-meta-row">
         <span>07/11/2026</span>
         <span>·</span>
-        <span>~5 min read</span>
+        <span>~6 min read</span>
       </div>
     </div>
   </header>
@@ -71,12 +71,12 @@
 
     <h2>Research, fast</h2>
     <p>
-      I hadn't worked with AgentCore, Bedrock, or Lambda before, so the days before the meeting went into figuring out what each service actually does and how it maps onto the MCP work I'd already built. The immediate problem they solve: my <a href="mcp-dev-workflow-servers.html">MCP servers</a> are currently limited by not having a proper LLM API endpoint of their own. AgentCore gives us that, and it stays inside our existing AWS budget instead of becoming a separate line item somebody has to justify.
+      I hadn't worked with AgentCore, Bedrock, or Lambda before, so the days before the meeting went into figuring out what each service actually does and how it maps onto the MCP work I'd already built. The immediate problem they solve: my <a href="mcp-dev-workflow-servers.html">MCP servers</a> are currently limited by not having a proper LLM API endpoint of their own. AgentCore gives us that, and it stays inside our existing AWS budget instead of becoming a separate line item somebody has to justify. It's also the missing piece for the <a href="mcp-server-pdf-import.html">PDF-import problem</a> — running a PDF directly through a foundation model sidesteps the extraction ceiling that every coded approach ran into, and AgentCore is what would actually let us run that.
     </p>
 
     <h2>Weighing Lambda</h2>
     <p>
-      I also looked at hosting the MCP servers on Lambda specifically — the tradeoffs around token efficiency and cost efficiency compared to how things run now. Not a decision I made alone in the meeting, but research I had to actually understand well enough to explain, not just repeat back.
+      I also looked at hosting the MCP servers on Lambda specifically — the tradeoffs around token efficiency and cost efficiency compared to how things run now. Lambda turned out to be the answer: it's how the servers would actually run and stay accessible to the whole team, instead of something only on my laptop.
     </p>
 
     <h2>Explaining, not demoing</h2>
@@ -90,6 +90,9 @@
     </p>
 
     <h2>What this says about where this is going</h2>
+    <p>
+      AWS ended up resolving more than one open problem in a single meeting — the missing LLM endpoint for the PDF pipeline, the hosting story for the dev-workflow servers. It felt like more than a process improvement; it felt like a real step toward launching our first actual AI product.
+    </p>
     <p>
       Nobody planned for me to lead that meeting. It happened because the results from the last few months made it the obvious call. That's become the actual pattern here: the more the AI work holds up in practice, the more I get handed the next piece of it to lead.
     </p>
