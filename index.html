@@ -166,7 +166,9 @@
                 <li>Built an agent that encodes the codebase's unwritten SQL conventions — cuts routine script time in half, complex schema-design tasks by a similar margin.</li>
                 <li>Built a second agent that audits code against WCAG rules and proposes phased, human-approved fixes, extended to generate per-file SVN patch files, then rebuilt to scan an entire codebase on its own — cutting the standard ~60-hour-per-system estimate to about 5 hours including diff review, across 50+ systems needing the work.</li>
                 <li>Proposed and built the company's first MCP server after the CEO asked whether AI could cut a manual client-import process, then built two more for internal dev workflows — one that answers schema and convention questions directly against our database, and one that uses SVN to answer codebase and commit questions and group edits into commits, cutting a class of manual SSMS/SVN lookups to seconds.</li>
+                <li>Led a technical meeting with AWS engineers on scaling our MCP infrastructure via AgentCore, Bedrock, and Lambda — researched and presented the architecture, demoed all three MCP servers, and identified AgentCore as the fix for our missing LLM API endpoint within our existing AWS budget.</li>
                 <li>Leading an inaugural UX/UI initiative to modernize a 30-year-old interface — architected a reusable, scalable CSS system with tokenized colors and folded ADA compliance into the same pass; after a senior dev demo, rebuilt the internal site's entire frontend from 20-year-old default Bootstrap styling to a modern, modular system in 3 days.</li>
+                <li>Now leading a new design system initiative — stripping our most modern product into documented, reusable components and a shared library for the rest of the team to build from.</li>
                 <li>Selected and mentored a 5-developer university capstone team, hiring one into a junior role — still mentoring him directly; he just hit one year with the company.</li>              </ul>
               <div class="tag-row">
                 <span class="tag tag-lang">ColdFusion</span>
@@ -176,8 +178,10 @@
                 <span class="tag tag-tool">GitHub Copilot</span>
                 <span class="tag tag-tool">MCP</span>
                 <span class="tag tag-tool">SVN</span>
+                <span class="tag tag-tool">AWS</span>
                 <span class="tag tag-concept">Agentic AI</span>
                 <span class="tag tag-concept">ADA / WCAG</span>
+                <span class="tag tag-concept">Design Systems</span>
               </div>
             </div>
           </div>
@@ -607,10 +611,12 @@
             <li>Tested several PDF extraction approaches — text libraries, PDF-to-HTML, PDF-to-Excel, vision-based table detection — none reached clean, production-ready output yet</li>
             <li>Confirmed with the dev team and outside research that PDF data extraction is a genuinely hard, open problem, not a gap in the approach</li>
             <li>DB and codebase MCP servers replaced routine SSMS/SVN lookups — schema relationships, missing convention scripts, and commit history all answered directly, no agent context limits</li>
+            <li>Led a technical meeting with AWS engineers on hosting these servers via <strong>AgentCore, Bedrock, and Lambda</strong> — solves the missing LLM API endpoint and moves them from my laptop to something the whole team can use</li>
           </ul>
           <div class="tag-row">
             <span class="tag tag-tool">MCP</span>
             <span class="tag tag-tool">SVN</span>
+            <span class="tag tag-tool">AWS</span>
             <span class="tag tag-lang">Python</span>
             <span class="tag tag-lang">SQL Server</span>
             <span class="tag tag-concept">Agentic AI</span>
@@ -640,11 +646,13 @@
             <li>Demoed to the team — senior dev said it should ship immediately if not for the contract-approval process</li>
             <li>ADA compliance rules folded directly into the rebuild, using the same standards behind the ADA Compliance Agent</li>
             <li>A second senior dev asked for the same UI/UX on our internal site — rebuilt that frontend from 20-year-old default Bootstrap styling to a modern, modular system in <strong>3 days</strong></li>
+            <li>Now leading a design system initiative — stripping our most modern product into documented, reusable components for the rest of the team</li>
           </ul>
           <div class="tag-row">
             <span class="tag tag-lang">CSS</span>
             <span class="tag tag-concept">UI/UX</span>
             <span class="tag tag-concept">WCAG</span>
+            <span class="tag tag-concept">Design Systems</span>
           </div>
           <div class="project-footer">
             <a href="articles/emr-ui-ux-overhaul.html" class="project-link">Read writeup →</a>
@@ -864,6 +872,36 @@
                 <span class="tag tag-tool">MCP</span>
                 <span class="tag tag-tool">SVN</span>
                 <span class="tag tag-lang">SQL Server</span>
+              </div>
+            </div>
+            <span class="article-date">07/11/2026</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="articles/design-system-lead.html" class="article-item">
+            <div>
+              <p class="article-title">Turning the UI rebuild into a design system</p>
+              <p class="article-teaser">The internal site rebuild is still in testing, and I'm already leading the next thing it led to: a documented design system for the rest of the team to build from.</p>
+              <div class="tag-row">
+                <span class="tag tag-lang">CSS</span>
+                <span class="tag tag-concept">UI/UX</span>
+                <span class="tag tag-concept">Design Systems</span>
+              </div>
+            </div>
+            <span class="article-date">07/11/2026</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="articles/aws-agentcore-mcp-scaling.html" class="article-item">
+            <div>
+              <p class="article-title">Scaling our MCP servers with AWS AgentCore, Bedrock, and Lambda</p>
+              <p class="article-teaser">A meeting with three AWS engineers, no plan to lead it, and a crash course in AgentCore, Bedrock, and Lambda to scale MCP servers past my own laptop.</p>
+              <div class="tag-row">
+                <span class="tag tag-tool">AWS</span>
+                <span class="tag tag-tool">MCP</span>
+                <span class="tag tag-concept">Agentic AI</span>
               </div>
             </div>
             <span class="article-date">07/11/2026</span>

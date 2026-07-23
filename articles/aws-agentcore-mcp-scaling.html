@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="A second senior dev loved the demo enough to ask for it on the real site — reusable CSS classes, color tokenization, and an entire frontend rebuilt in three days." />
+  <meta name="description" content="A meeting with three AWS engineers, no plan to lead it, and a crash course in AgentCore, Bedrock, and Lambda to scale MCP servers past my own laptop." />
 
-  <meta property="og:title" content="Rebuilding the Internal Site's Frontend in Three Days — Joan Escamilla" />
-  <meta property="og:description" content="A second senior dev loved the demo enough to ask for it on the real site — reusable CSS classes, color tokenization, and an entire frontend rebuilt in three days." />
+  <meta property="og:title" content="Scaling Our MCP Servers With AWS AgentCore, Bedrock, and Lambda — Joan Escamilla" />
+  <meta property="og:description" content="A meeting with three AWS engineers, no plan to lead it, and a crash course in AgentCore, Bedrock, and Lambda to scale MCP servers past my own laptop." />
   <meta property="og:type" content="article" />
-  <meta property="og:url" content="https://jescamilla1.github.io/articles/ui-ux-internal-rollout.html" />
+  <meta property="og:url" content="https://jescamilla1.github.io/articles/aws-agentcore-mcp-scaling.html" />
   <meta property="og:image" content="https://jescamilla1.github.io/Logos/Banner.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Rebuilding the Internal Site's Frontend in Three Days — Joan Escamilla" />
-  <meta name="twitter:description" content="A second senior dev loved the demo enough to ask for it on the real site — reusable CSS classes, color tokenization, and an entire frontend rebuilt in three days." />
+  <meta name="twitter:title" content="Scaling Our MCP Servers With AWS AgentCore, Bedrock, and Lambda — Joan Escamilla" />
+  <meta name="twitter:description" content="A meeting with three AWS engineers, no plan to lead it, and a crash course in AgentCore, Bedrock, and Lambda to scale MCP servers past my own laptop." />
   <meta name="twitter:image" content="https://jescamilla1.github.io/Logos/Banner.jpg" />
 
   <link rel="icon" type="image/png" href="/favicon.png" />
 
-  <title>Rebuilding the Internal Site's Frontend in Three Days — Joan Escamilla</title>
+  <title>Scaling Our MCP Servers With AWS AgentCore, Bedrock, and Lambda — Joan Escamilla</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -54,7 +54,7 @@
         Back to Writing
       </a>
       <p class="t-label">Writeup</p>
-      <h1 class="article-page-title">Rebuilding the internal site's frontend in three days</h1>
+      <h1 class="article-page-title">Scaling our MCP servers with AWS AgentCore, Bedrock, and Lambda</h1>
       <div class="article-meta-row">
         <span>07/11/2026</span>
         <span>·</span>
@@ -66,25 +66,27 @@
   <article class="article-content">
 
     <p>
-      I demoed a new prototype UI to our UI/UX team this week — an extension of the <a href="emr-ui-ux-overhaul.html">rebuild</a> I'd already been doing. A second senior dev in the room said he'd push it to production immediately if it weren't for needing to loop in the contracting team first. Then he reached out directly with something more specific: take that same UI/UX and apply it to our internal site, which was still running the exact same outdated styling as everything else.
+      I got put into a meeting with a networking team member and three people from AWS, talking through our current AI use and where we want to take it. Nobody assigned me to lead it going in. About ten minutes into the technical parts, the networking guy turned to me and asked me to take it from there.
     </p>
 
-    <h2>More than prompting for updates</h2>
+    <h2>Research, fast</h2>
     <p>
-      This wasn't just asking AI for a fresh coat of paint. I fixed real UI issues in our datatables, and effectively rebuilt the entire frontend. Instead of only prompting for individual updates, I built AI skills to guide the work itself — generating reusable CSS classes, tokenizing colors instead of hardcoding them, and pushing for actual modularity instead of one-off fixes per page.
+      I hadn't worked with AgentCore, Bedrock, or Lambda before, so the days before the meeting went into figuring out what each service actually does and how it maps onto the MCP work I'd already built. The immediate problem they solve: my <a href="mcp-dev-workflow-servers.html">MCP servers</a> are currently limited by not having a proper LLM API endpoint of their own. AgentCore gives us that, and it stays inside our existing AWS budget instead of becoming a separate line item somebody has to justify.
     </p>
 
-    <h2>Building it so it travels</h2>
+    <h2>Weighing Lambda</h2>
     <p>
-      The point wasn't just to fix this one site — it was to build the styles so they could be applied to our other systems too. I reworked the styling from the ground up, then went through the existing files extracting the pieces that needed the new classes and implementing them in place, instead of leaving the new system sitting next to the old one.
+      I also looked at hosting the MCP servers on Lambda specifically — the tradeoffs around token efficiency and cost efficiency compared to how things run now. Not a decision I made alone in the meeting, but research I had to actually understand well enough to explain, not just repeat back.
     </p>
 
-    <h2>Three days</h2>
+    <h2>Demoing three servers</h2>
     <p>
-      Planning and executing a frontend rebuild like this normally takes days by itself before any code gets touched. I had a new frontend in three. The site had been running the most basic default Bootstrap styling for about 20 years; it has a modern look now. There's still plenty left to improve, but the gap between "outdated" and "current" closed faster than I expected it could.
+      I walked the room through all three MCP servers I've built so far: the <a href="mcp-server-pdf-import.html">PDF-import pipeline</a>, ready to go once we have AWS access, and the two dev-focused tools — one that answers questions about our database and schema, one that uses SVN to answer questions about recent changes to files. All of it in natural language. Hosting them on AWS means they stop being something only I can run locally and become something the rest of the team can actually use: asking about a complex schema relationship that isn't obvious from reading the code or querying SSMS, or asking whether a recent commit might have introduced a regression.
     </p>
+
+    <h2>What this says about where this is going</h2>
     <p>
-      Update: that rebuild is still in testing, and it's already led to something bigger — see <a href="design-system-lead.html">the follow-up</a> on becoming the lead on our new design system.
+      Nobody planned for me to lead that meeting. It happened because the results from the last few months made it the obvious call. That's become the actual pattern here: the more the AI work holds up in practice, the more I get handed the next piece of it to lead.
     </p>
 
     <div class="article-footer-nav">
