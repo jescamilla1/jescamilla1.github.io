@@ -58,7 +58,7 @@
       <div class="article-meta-row">
         <span>07/11/2026</span>
         <span>·</span>
-        <span>~4 min read</span>
+        <span>~5 min read</span>
       </div>
     </div>
   </header>
@@ -79,9 +79,14 @@
       I also looked at hosting the MCP servers on Lambda specifically — the tradeoffs around token efficiency and cost efficiency compared to how things run now. Not a decision I made alone in the meeting, but research I had to actually understand well enough to explain, not just repeat back.
     </p>
 
-    <h2>Demoing three servers</h2>
+    <h2>Explaining, not demoing</h2>
     <p>
-      I walked the room through all three MCP servers I've built so far: the <a href="mcp-server-pdf-import.html">PDF-import pipeline</a>, ready to go once we have AWS access, and the two dev-focused tools — one that answers questions about our database and schema, one that uses SVN to answer questions about recent changes to files. All of it in natural language. Hosting them on AWS means they stop being something only I can run locally and become something the rest of the team can actually use: asking about a complex schema relationship that isn't obvious from reading the code or querying SSMS, or asking whether a recent commit might have introduced a regression.
+      I didn't run a live demo in that room — what I gave was a high-level walkthrough of all three MCP servers I've built so far: the <a href="mcp-server-pdf-import.html">PDF-import pipeline</a>, ready to go once we have AWS access, and the two dev-focused tools — one that answers questions about our database and schema, one that uses SVN to answer questions about recent changes to files. All of it in natural language. Hosting them on AWS means they stop being something only I can run locally and become something the rest of the team can actually use: asking about a complex schema relationship that isn't obvious from reading the code or querying SSMS, or asking whether a recent commit might have introduced a regression.
+    </p>
+
+    <h2>The actual demo came later</h2>
+    <p>
+      The real demo happened separately, at our internal AI meeting, presenting to a senior dev. He liked it — and framed the value in a way I hadn't quite put into words myself: that this is a step in the right direction for proper system documentation. That lines up with the <a href="design-system-lead.html">design system</a> work I've also started leading; both are, underneath it, about turning tribal knowledge — schema relationships, commit history, component patterns — into something documented and shared instead of something that only lives in my head.
     </p>
 
     <h2>What this says about where this is going</h2>
