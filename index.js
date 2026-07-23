@@ -518,3 +518,50 @@ requestAnimationFrame(() => {
     grid.scrollBy({ left: e.deltaY });
   }, { passive: false });
 })();
+
+// Writing list pagination
+(function initWritingPagination() {
+  const list = document.querySelector('.article-list');
+  const pagination = document.getElementById('writing-pagination');
+  if (!list || !pagination) return;
+
+  const items = Array.from(list.children).filter((el) => el.tagName === 'LI');
+  const PER_PAGE = 6;
+  const pageCount = Math.ceil(items.length / PER_PAGE);
+  if (pageCount <= 1) { pagination.style.display = 'none'; return; }
+
+  const prevBtn = pagination.querySelector('.writing-page-nav.prev');
+  const nextBtn = pagination.querySelector('.writing-page-nav.next');
+  const numbersEl = document.getElementById('writing-page-numbers');
+
+  let currentPage = 1;
+
+  function renderPageNumbers() {
+    numbersEl.innerHTML = '';
+    for (let i = 1; i <= pageCount; i++) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'writing-page-btn' + (i === currentPage ? ' is-active' : '');
+      btn.textContent = String(i);
+      btn.setAttribute('aria-label', 'Page ' + i);
+      btn.addEventListener('click', () => goToPage(i));
+      numbersEl.appendChild(btn);
+    }
+  }
+
+  function goToPage(page) {
+    currentPage = Math.min(Math.max(page, 1), pageCount);
+    items.forEach((item, idx) => {
+      const itemPage = Math.floor(idx / PER_PAGE) + 1;
+      item.classList.toggle('is-hidden', itemPage !== currentPage);
+    });
+    renderPageNumbers();
+    prevBtn.disabled = currentPage === 1;
+    nextBtn.disabled = currentPage === pageCount;
+  }
+
+  prevBtn.addEventListener('click', () => goToPage(currentPage - 1));
+  nextBtn.addEventListener('click', () => goToPage(currentPage + 1));
+
+  goToPage(1);
+})();

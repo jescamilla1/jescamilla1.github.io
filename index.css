@@ -876,6 +876,52 @@ ul { list-style: none; }
   color: var(--text-secondary);
   margin-top: 2px;
 }
+.article-list > li.is-hidden { display: none; }
+
+.writing-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+}
+.writing-page-nav {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity var(--transition), border-color var(--transition), color var(--transition);
+}
+.writing-page-nav:hover { border-color: var(--accent); color: var(--accent); }
+.writing-page-nav svg { width: 16px; height: 16px; }
+.writing-page-nav:disabled { opacity: 0.35; cursor: default; pointer-events: none; }
+.writing-page-numbers { display: flex; gap: var(--space-xs); }
+.writing-page-btn {
+  min-width: 32px;
+  height: 32px;
+  padding: 0 8px;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: color var(--transition), border-color var(--transition), background var(--transition);
+}
+.writing-page-btn:hover { color: var(--text-primary); border-color: var(--border); }
+.writing-page-btn.is-active {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--bg-surface);
+}
 
 /* ============================================================
    CONTACT
