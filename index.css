@@ -2,26 +2,29 @@
    TOKENS — edit these to retheme the entire site
 ============================================================ */
 :root {
-  --bg-base:        #0a0a0b;
-  --bg-surface:     #111113;
-  --bg-elevated:    #18181b;
-  --border:         #27272a;
-  --border-accent:  #3f3f46;
+  --bg-base:        #161826;
+  --bg-surface:     #232532;
+  --bg-elevated:    #2b2e40;
+  --border:         color-mix(in srgb, #e9e9ed 16%, transparent);
+  --border-accent:  color-mix(in srgb, #e9e9ed 32%, transparent);
 
-  --text-primary:   #f4f4f5;
-  --text-secondary: #71717a;
-  --text-muted:     #3f3f46;
+  --text-primary:   #e9e9ed;
+  --text-secondary: color-mix(in srgb, #e9e9ed 55%, transparent);
+  --text-muted:     color-mix(in srgb, #e9e9ed 38%, transparent);
 
-  --accent:         #2dd4b8;
-  --accent-dim:     #0d1f1d;
-  --accent-glow:    rgba(45, 212, 184, 0.10);
+  --accent:         #9184d9;
+  --accent-300:     #d2cefd;
+  --accent-dim:     #2b2741;
+  --accent-glow:    rgba(145, 132, 217, 0.10);
 
   --font-sans: 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
   --radius-sm:  4px;
   --radius-md:  8px;
-  --radius-lg:  12px;
+  --radius-lg:  14px;
+
+  --shadow-md: 0 6px 18px rgba(0, 0, 0, 0.35);
 
   --space-xs:  0.25rem;
   --space-sm:  0.5rem;
@@ -48,9 +51,10 @@
   --text-secondary: #524d48;
   --text-muted:     #9e9890;
 
-  --accent:         #0a8f7a;
-  --accent-dim:     #ddf2ee;
-  --accent-glow:    rgba(10, 143, 122, 0.10);
+  --accent:         #5d5294;
+  --accent-300:     #6b5fa8;
+  --accent-dim:     #e7e5fe;
+  --accent-glow:    rgba(93, 82, 148, 0.10);
 }
 /* ============================================================
    RESET
@@ -143,7 +147,8 @@ ul { list-style: none; }
   padding: var(--space-xl) 0;
 }
 .section + .section {
-  border-top: 1px solid var(--border);
+  border-top: 1px solid transparent;
+  border-image: linear-gradient(to right, transparent, var(--border) 48px, var(--border) calc(100% - 48px), transparent) 1;
 }
 .stack { display: flex; flex-direction: column; }
 .stack-sm  { gap: var(--space-sm); }
@@ -232,8 +237,8 @@ ul { list-style: none; }
   display: flex;
   align-items: center;
   background:
-    radial-gradient(ellipse 80% 60% at 60% 40%, rgba(45, 212, 184, 0.06) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 40% at 20% 70%, rgba(13, 158, 135, 0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 60% at 60% 40%, rgba(145, 132, 217, 0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 20% 70%, rgba(121, 108, 191, 0.05) 0%, transparent 60%),
     var(--bg-base);
 }
 #hero .container {
@@ -245,7 +250,7 @@ ul { list-style: none; }
 .hero-tagline {
   font-size: clamp(1.1rem, 2.4vw, 1.4rem);
   font-weight: 500;
-  color: var(--text-primary);
+  color: var(--accent-300);
   margin-bottom: var(--space-sm);
   max-width: 480px;
 }
@@ -341,11 +346,11 @@ ul { list-style: none; }
   border: 1px solid transparent;
 }
 .btn-primary {
-  background: var(--accent);
-  color: #fff;
+  background: transparent;
+  color: var(--accent);
   border-color: var(--accent);
 }
-.btn-primary:hover { filter: brightness(1.12); }
+.btn-primary:hover { background: var(--accent-glow); }
 .btn-ghost {
   background: transparent;
   color: var(--text-secondary);
@@ -618,14 +623,14 @@ ul { list-style: none; }
 }
 .tag-concept {
   color: var(--accent);
-  border-color: #2dd4b830;
-  background: #2dd4b808;
+  border-color: #9184d930;
+  background: #9184d908;
 }
 
 [data-theme="light"] .tag-lang      { color: #9a3412; background: #e4a86e12; border-color: #e4a86e50; }
 [data-theme="light"] .tag-framework { color: #1e40af; background: #7aa2e412; border-color: #7aa2e450; }
 [data-theme="light"] .tag-tool      { color: #6b21a8; background: #a87ae412; border-color: #a87ae450; }
-[data-theme="light"] .tag-concept   { background: #0d9e8712; border-color: #0d9e8750; }
+[data-theme="light"] .tag-concept   { background: #5d529412; border-color: #5d529450; }
 /* ============================================================
    PROJECTS
 ============================================================ */
@@ -692,6 +697,7 @@ ul { list-style: none; }
   background: var(--bg-surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
   padding: var(--space-lg);
   transition: border-color var(--transition), background var(--transition);
   display: flex;
@@ -1194,6 +1200,7 @@ ul { list-style: none; }
   background: var(--bg-surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
   padding: var(--space-md) var(--space-lg);
   flex: 1 1 280px;
   transition: border-color var(--transition), background var(--transition);

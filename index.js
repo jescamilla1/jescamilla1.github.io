@@ -185,8 +185,8 @@ toggle.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : '
         ctx.moveTo(n.x, n.y);
         ctx.lineTo(other.x, other.y);
         ctx.strokeStyle = dark
-          ? `rgba(45, 212, 184, ${opacity})`
-          : `rgba(10, 143, 122, ${opacity})`;
+          ? `rgba(145, 132, 217, ${opacity})`
+          : `rgba(93, 82, 148, ${opacity})`;
         ctx.lineWidth = 1;
         ctx.stroke();
       });
@@ -205,7 +205,7 @@ toggle.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : '
       ctx.beginPath();
       ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
       ctx.fillStyle = activated
-        ? (dark ? 'rgba(45, 212, 184, 0.95)' : 'rgba(10, 143, 122, 0.95)')
+        ? (dark ? 'rgba(145, 132, 217, 0.95)' : 'rgba(93, 82, 148, 0.95)')
         : (dark ? 'rgba(244, 244, 245, 0.55)' : 'rgba(20, 18, 16, 0.45)');
       ctx.fill();
 
@@ -213,8 +213,8 @@ toggle.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : '
         ctx.beginPath();
         ctx.arc(n.x, n.y, r + 4 + pulse * 4, 0, Math.PI * 2);
         ctx.strokeStyle = dark
-          ? `rgba(45, 212, 184, ${0.3 * pulse})`
-          : `rgba(10, 143, 122, ${0.3 * pulse})`;
+          ? `rgba(145, 132, 217, ${0.3 * pulse})`
+          : `rgba(93, 82, 148, ${0.3 * pulse})`;
         ctx.lineWidth = 1;
         ctx.stroke();
       }
