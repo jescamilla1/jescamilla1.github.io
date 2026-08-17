@@ -1,8 +1,8 @@
-# jescamilla1.github.io
+# joanescamilla.com
 
 Personal portfolio site for Joan Escamilla — Software Engineer at RDE Systems,
 building production AI agents. Live at
-[jescamilla1.github.io](https://jescamilla1.github.io).
+[joanescamilla.com](https://joanescamilla.com).
 
 Static site, no build step — plain HTML/CSS/JS.
 

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+
+  <script>
+    (function() {
+      var t = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <title>Page not found — Joan Escamilla</title>
+
+  <link rel="icon" type="image/png" href="/favicon.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       NAV
+  ============================================================ -->
+  <nav id="nav" class="scrolled" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="Joan Escamilla, home">
+        <span class="nav-logo-text">Joan.Escamilla</span>
+      </a>
+      <div class="nav-links">
+        <a href="/#projects">Projects</a>
+        <a href="/#writing">Writing</a>
+        <a href="/#contact">Contact</a>
+        <button id="theme-toggle" aria-label="Toggle theme">light</button>
+      </div>
+      <button id="nav-menu-toggle" class="nav-menu-toggle" aria-label="Open menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       404
+  ============================================================ -->
+  <main id="notfound">
+    <div class="container notfound-inner">
+      <p class="t-label notfound-code">404</p>
+      <h1 class="t-display">This page doesn't exist.</h1>
+      <p class="notfound-sub">Even I can't explain why this URL doesn't resolve. Try one of these instead.</p>
+      <div class="notfound-links">
+        <a href="/" class="btn btn-primary">Back home</a>
+        <a href="/#projects" class="btn btn-ghost">See my work</a>
+        <a href="/#writing" class="btn btn-ghost">Read something</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Scripts — loaded at end of body so DOM is ready -->
+  <script src="index.js"></script>
+
+</body>
+</html>

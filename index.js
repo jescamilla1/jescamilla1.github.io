@@ -312,7 +312,7 @@ toggle.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : '
 ============================================================ */
 requestAnimationFrame(() => {
   const fadeEls = document.querySelectorAll(
-    '.exp-item, .project-card, .article-item, .section-header, .contact-inner, .about-body'
+    '.exp-item, .project-row, .article-item, .section-header, .contact-inner, .about-body'
   );
 
   fadeEls.forEach(el => el.classList.add('fade-init'));
@@ -420,104 +420,6 @@ requestAnimationFrame(() => {
   });
 })();
 
-/* ============================================================
-   CONTACT FORM → mailto
-============================================================ */
-(function initContactForm() {
-  const form = document.getElementById('contact-form');
-  if (!form) return;
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const reason  = document.getElementById('contact-reason')?.value || 'Reaching out';
-    const name    = document.getElementById('contact-name')?.value.trim() || '';
-    const message = document.getElementById('contact-message')?.value.trim() || '';
-
-    const subject = name ? `${reason} — from ${name}` : reason;
-
-    let body = message ? `${message}\n\n` : '';
-    body += `—\nSent via jescamilla.github.io`; // swap for your real domain
-
-    const mailto = `mailto:joan.escamilla1@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailto;
-  });
-})();
-
-/* ============================================================
-   PROJECT THUMBNAIL CAROUSELS
-   Drop <img> tags into a .project-thumb-track (replacing its
-   placeholder div) and this wires up dots + arrows automatically.
-   Single image or no images: controls stay hidden, nothing to do.
-============================================================ */
-(function initProjectThumbs() {
-  document.querySelectorAll('.project-thumb').forEach((thumb) => {
-    const track = thumb.querySelector('.project-thumb-track');
-    const dotsWrap = thumb.querySelector('.project-thumb-dots');
-    const prevBtn = thumb.querySelector('.project-thumb-arrow.prev');
-    const nextBtn = thumb.querySelector('.project-thumb-arrow.next');
-    const slides = Array.from(track.querySelectorAll('img'));
-    const count = slides.length;
-    thumb.setAttribute('data-count', String(count));
-    if (count < 2 || !dotsWrap || !prevBtn || !nextBtn) return;
-
-    let index = 0;
-    slides.forEach((_, i) => {
-      const dot = document.createElement('button');
-      dot.type = 'button';
-      dot.className = 'project-thumb-dot' + (i === 0 ? ' is-active' : '');
-      dot.setAttribute('aria-label', `Go to image ${i + 1}`);
-      dot.addEventListener('click', () => goTo(i));
-      dotsWrap.appendChild(dot);
-    });
-    const dots = Array.from(dotsWrap.children);
-
-    function goTo(i) {
-      index = (i + count) % count;
-      track.style.transform = `translateX(-${index * 100}%)`;
-      dots.forEach((d, di) => d.classList.toggle('is-active', di === index));
-    }
-    prevBtn.addEventListener('click', () => goTo(index - 1));
-    nextBtn.addEventListener('click', () => goTo(index + 1));
-  });
-})();
-
-/* ============================================================
-   PROJECTS ROW — wheel-to-horizontal scroll, edge fades/arrows
-============================================================ */
-(function initProjectsScroller() {
-  const wrap = document.querySelector('.projects-scroll-wrap');
-  const grid = document.querySelector('.projects-grid');
-  if (!wrap || !grid) return;
-
-  const prevBtn = wrap.querySelector('.projects-nav.prev');
-  const nextBtn = wrap.querySelector('.projects-nav.next');
-
-  function cardStep() {
-    const card = grid.querySelector('.project-card');
-    const gap = parseFloat(getComputedStyle(grid).columnGap || '16');
-    return card ? card.getBoundingClientRect().width + gap : 320;
-  }
-
-  function updateEdges() {
-    wrap.classList.toggle('is-at-start', grid.scrollLeft <= 4);
-    wrap.classList.toggle('is-at-end', grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 4);
-  }
-
-  prevBtn?.addEventListener('click', () => grid.scrollBy({ left: -cardStep(), behavior: 'smooth' }));
-  nextBtn?.addEventListener('click', () => grid.scrollBy({ left: cardStep(), behavior: 'smooth' }));
-
-  grid.addEventListener('scroll', updateEdges, { passive: true });
-  window.addEventListener('resize', updateEdges);
-  updateEdges();
-
-  // Map vertical mouse-wheel input to horizontal scroll while over the row
-  grid.addEventListener('wheel', (e) => {
-    if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
-    e.preventDefault();
-    grid.scrollBy({ left: e.deltaY });
-  }, { passive: false });
-})();
 
 // Writing list pagination
 (function initWritingPagination() {
